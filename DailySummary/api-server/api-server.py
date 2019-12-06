@@ -77,6 +77,31 @@ def register():
 
     return jsonify({'result' : result})
 
+@app.route('/post_input', methods=['POST'])
+def input():
+    cur = mysql.connection.cursor()
+    user_email = request.get_json()['user_email']
+    paragraph = request.get_json()['paragraph']
+    strength_of_feeling = request.get_json()['strength_of_feeling']
+    created_data_time = datetime.utcnow()
+
+    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" + 
+    str(user_email) + "', '" +
+    str(paragraph) + "', '" +
+    str(strength_of_feeling) + "', '" + 
+    str(created_data_time) + "')")
+
+    mysql.connection.commit()
+    
+
+    result = {
+        'user_email' : user_email,
+        'paragraph' : paragraph,
+        'strength_of_feeling' : strength_of_feeling,
+        'created_data_time' : created_data_time
+    }
+
+    return jsonify({'result' : result})
 
 if __name__ == '__main__':
     app.run(debug=True)
