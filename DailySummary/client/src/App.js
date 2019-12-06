@@ -94,13 +94,12 @@ class App extends Component {
 
   writeBtnClicked = e => {
     console.log(e)
-    e.preventDefault();
-    e.stopPropagation();
     if( {isLogined : this.state.isLogined } === false) {
       this.props.history.push('/login')
-    } else {
-      this.props.history.push('post/write')
-    }
+    } 
+    // else {
+    //   this.props.history.push('/post/write')
+    // }
   }
 
   render () {
