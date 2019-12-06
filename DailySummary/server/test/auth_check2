@@ -1,0 +1,7 @@
+curl -i --location --request GET "http://localhost:9000/api/auth/check" \
+--header "x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIzLCJpYXQiOjE1NzUyMTk5MTQsImV4cCI6MTU3NTgyNDcxNCwiaXNzIjoiMXNlbnRlbmNlLm1sIiwic3ViIjoidXNlckluZm8ifQ.26S0gTxuHDOQOAjPPQTE_K3Q84e17J0dP5VJl-CyGF8" \
+--header "Content-Type: application/json" \
+--data "{
+    \"email\": \"aaa@abc.com\",
+    \"password\": \"abc\"
+}"

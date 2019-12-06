@@ -1,0 +1,330 @@
+// layout
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+// position
+.position-center {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.position-vertical-center {
+	top: 50%;
+	transform: translateY(-50%);
+}
+.position-horizontal-center {
+	left: 50%;
+	transform: translateX(-50%);
+}
+.position-full-page {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.line-break {
+	display: block;
+}
+
+.one-sidebar {
+  height: 100vh;
+  font-family: 'Single Day', cursive;
+  font-size: 3em;
+}
+
+.one-nav {
+  height: 100%;
+}
+
+.one-main {
+  height: 100vh;
+  background-color: #fff;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Song+Myung&display=swap');
+.one-menu-logo {
+  @media screen and (max-width:990px) {  
+    display: none;  
+    }
+  a {
+    color: black;
+    font-size: 2.5rem;
+    //font-family: 'Stylish', sans-serif;
+    font-family: 'Single Day', cursive;
+    }
+  }
+
+.one-logo {  
+  font-size: 3rem;        
+  span {
+    cursor: pointer;
+    color: black;
+    //font-family: 'Stylish', sans-serif;
+    font-family: 'Single Day', cursive;
+    }
+  } 
+
+@media screen and (min-width:990px) {  
+  .one-header {
+  background-color: #f0f2f5;
+  display: none;      
+  } 
+};
+
+@media screen and (max-width:990px) {  
+  .one-header {
+    display: block;
+    } 
+};
+
+.one-welcome {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  
+  .txt {
+    position: relative;
+    z-index: 10;
+    font-weight: lighter;
+    font-size: 2.4rem;
+  }
+  
+  .img {
+    position: absolute;
+    z-index: 1;
+    width: auto;
+    height: 100%;
+  }
+  
+  .btn-wrap {
+    position: absolute;
+    top: 71%;
+    z-index: 1;
+    width: 3.65em;
+    height: 3.65em;
+  }
+  
+  .btn-shortcut {
+    width: 2em;
+    min-width: auto;
+    height: 2em;
+    font-size: 1.6rem;
+  }
+}
+
+.one-login {
+  height: 100%;
+  
+  .shortcut {
+    justify-content: space-evenly;
+  }
+  
+  .one-input-email {
+    margin-bottom: 0;
+  }
+  
+  .one-input-pw {
+    margin-bottom: 0.75em;
+  }
+}
+
+// emotion
+.one-contents-emotion {
+  .emotion-describe {
+    font-size: 0.6rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    z-index:50;
+  }
+  .ant-btn-primary {
+    margin-top: 2em;
+  }
+}
+
+.one-post-write {
+  height: 100%;
+  padding: 9% 7%;
+  clear: both;
+  
+  .one-liveClock-container {
+    padding: 0.5em ;
+    float: left;
+    font-family: 'Song Myung', serif;
+    font-size: 1.4rem;
+  }
+  
+  .one-textarea {
+    height: 100%;
+    margin-bottom: 0.4em;
+    margin-top:0.4em;
+    font-family: 'Song Myung', serif;
+    font-size: 1.3rem;
+  }
+
+  .one-post-btn-container {
+    justify-content: space-between;
+    top: 0.5em; 
+    font-family: 'Song Myung', serif;
+    font-size: 0.3rem;
+  }
+}
+
+.one-settings {
+  flex-direction: column;
+  height: 100%;
+  
+  .ant-form-item {
+    width: 400px;
+    transform: translateX(-14%);
+  }
+  
+  .btn-wrap {
+    .ant-form-item-control-wrapper {
+      width: 100%;
+      margin-left: 0;
+    }
+    
+    .ant-form-item-children {
+      margin-left: 133px;
+    }
+    
+    .btn-submit {
+      margin-right: 0.8em;
+    }
+  }
+}
+
+
+.one-signup {
+  flex-direction: column;
+  height: 100%;
+  
+  .ant-form-item {
+    width: 400px;
+    transform: translateX(-14%);
+  }
+  
+  .one-checkbox-wrap,
+  .btn-wrap {
+    margin-bottom: 0;
+  }
+}
+
+.one-unsubscribe {
+  flex-direction: column;
+  height: 100%;
+  
+  .txt {
+    margin-bottom: 3em;
+  }
+  
+  .line-break {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  
+  .btn-cancel {
+    margin-right: 0.8em;
+  }
+}
+
+.one-list {
+  position: relative;
+  top: 50%;
+  margin: 0 5%;
+  transform: translateY(-50%);
+  
+  .ant-list-item-meta-content {
+    display: flex;
+  }
+  
+  .ant-list-item-meta-title {
+    order: 2;
+  }
+  
+  .ant-list-item-meta-description {
+    margin-right: 1em;
+  }
+}
+
+
+.one-content-notfound {
+  height: 100%;
+  text-align: center;
+}
+
+.one-selected-review , .one-selected-summary{
+  height: 100%;
+  padding: 9% 7%;
+  clear: both;
+
+  .one-selected-date-emo-wrapper {
+    flex-direction: row;
+    margin-bottom: 1%;
+
+    .one-selected-date {
+      width: 50%; 
+      height: 5vh;
+      display: inline-block;
+      padding: 0.5rem;
+      margin-left: left 1%;
+      background: #e8f8f1;
+      border-radius: 20px;
+      font-family: 'Song Myung', serif;
+      font-size: 1.2rem;
+    } 
+    .one-selected-emotion {
+      display: inline-block;
+      border: 1em;
+      width: 5vh;
+      height: 5vh;
+      border-radius: 50px;
+      background: rgb(210, 224, 236);
+    }   
+  }
+
+  .one-selected-textarea {
+    height: 80%;
+    margin-bottom: 1.5em;
+    padding: 2rem;
+    border-radius: 20px;
+    border-color: rgb(243, 200, 200);
+    background-color: rgb(243, 245, 243);
+    font-family: 'Song Myung', serif;
+    font-size: 1.1rem;
+  }
+  
+  .one-selected-btnContainer {
+    justify-content: space-between;
+    top: 1em;
+  }
+}
+//모달 테스트용
+.one-modal {
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    background: white;
+    padding: 1rem;
+    width: 400px;
+    height: auto;
+  }
+}
+
