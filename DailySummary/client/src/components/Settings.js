@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Form, Input, Select, Button, AutoComplete } from 'antd';
 import axios from 'axios';
 
@@ -13,29 +13,28 @@ class Settings extends Component {
     autoCompleteResult: [],
   };
 
-  resetBtnClicked () {
-    axios.post(config.serverUrl + '/password_reset', {
-      user_email: this.state.email,
-      user_password: this.state.password,
-    }).then(res => {      
-      console.log(res.result)
-      this.props.history.push("/posts");
-    }).catch((error) => {
-      if (error.response) {
-        alert(error.response.status + ": " + 
-              error.response.data.message);
-      } else {
-        alert(error);
-      }
-    })
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
+      
+      axios.post(config.serverUrl + '/password_reset', {
+        user_email: 'haha@gmail.com',
+        // user_email: values.email,
+        user_password: values.password,
+      }).then(res => {      
+        console.log(res.result)
+        this.props.history.push("/posts");
+      }).catch((error) => {
+        if (error.response) {
+          alert(error.response.status + ": " + 
+                error.response.data.message);
+        } else {
+          alert(error);
+        }
+      })
     });
   };
 
@@ -127,7 +126,7 @@ class Settings extends Component {
           })(<Input.Password onBlur={this.handleConfirmBlur} />)}
         </Form.Item>
         <Form.Item {...tailFormItemLayout} className="btn-wrap flex">
-          <Button type="primary" htmlType="submit" className="btn btn-submit" onClick="this.resetBtnClicked">
+          <Button type="primary" htmlType="submit" className="btn btn-submit">
             변경
           </Button>
           <Button className="btn btn-unsubscribe">
@@ -143,4 +142,4 @@ class Settings extends Component {
 
 const WrappedSettingsForm = Form.create({ name: 'register' })(Settings);
 
-export default WrappedSettingsForm;
+export default withRouter(WrappedSettingsForm);

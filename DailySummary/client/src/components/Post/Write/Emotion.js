@@ -6,7 +6,7 @@ class Emotion extends Component {
     return(
       <div className="one-contents-emotion">
         <p className="emotion-describe">오늘 기분은??</p>
-        <div className='iconList' style={{ padding: 5, background: '#fff', minHeight: 20}}>
+        <div className='iconList'>
           <Button value="4" onClick={this.props.clickHandler}>
             <Icon type="like" />
           </Button>

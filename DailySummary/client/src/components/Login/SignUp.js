@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Form, Input, Select, Checkbox, Button, AutoComplete } from 'antd';
 import axios from 'axios';
 
@@ -19,18 +19,20 @@ class SignUpForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        axios.post(config.serverUrl + '/register', {
-          user_email: values.email,
-          user_password: values.password,
-        })
-        .then((response) => {
-          alert(response);
-        })
-        .catch((error) => {
-          alert(error.response.status + ": " + 
-                error.response.data.message);
-        });        
       }
+      
+      axios.post(config.serverUrl + '/register', {
+        user_email: values.email,
+        user_password: values.password,
+      })
+      .then((response) => {
+        alert(`${response.user_email} 님의 회원가입이 완료되었습니다.`);
+        this.props.history.push('/login');
+      })
+      .catch((error) => {
+        // alert(error.response.status + ": " + 
+        //       error.response.data.message);
+      });        
     });
   };
 
@@ -168,4 +170,4 @@ class SignUpForm extends Component {
 
 const WrappedSignUpForm = Form.create({ name: 'register' })(SignUpForm);
 
-export default WrappedSignUpForm;
+export default withRouter(WrappedSignUpForm);
