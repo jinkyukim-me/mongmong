@@ -24,11 +24,13 @@ class SignUpForm extends Component {
           user_password: values.password,
         })
         .then((response) => {
-          alert(response);
+          alert('가입되었습니다.');
+          // this.props.history.push('/login')
         })
         .catch((error) => {
-          alert(error.response.status + ": " + 
-                error.response.data.message);
+          console.log(error)
+          // alert(error.response.status + ": " + 
+          //       error.response.data.message);
         });        
       }
     });

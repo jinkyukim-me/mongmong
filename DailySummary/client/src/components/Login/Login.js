@@ -14,10 +14,13 @@ class NormalLoginForm extends Component {
       user_email: email,
       user_password: password,
     }).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       localStorage.setItem("token", res.data.token);
-      console.log(this.props.setIsLogined)
-      //this.props.setIsLogined(true);
+      this.setState({
+        setIsLogined : this.setIsLogined
+      }) 
+      // console.log(this.props.setIsLogined)
+      // this.props.setIsLogined(true);
       this.props.history.push("/post/write");
     }).catch((error) => {
       if (error.response) {
