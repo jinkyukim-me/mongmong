@@ -94,29 +94,6 @@ def post_input():
     return jsonify({'result': result})
 
 
-@app.route('/post_edit', methods=['post'])
-@jwt_required
-def post_edit():
-    cur = mysql.connection.cursor()
-    user_email = get_jwt_identity()['user_email']
-    paragraph = request.get_json()['paragraph']
-    strength_of_feeling = request.get_json()['strength_of_feeling']
-    modified_data_time = datetime.utcnow()
-
-    cur.executecur.execute("UPDATE user_post SET paragraph = '" + str(paragraph) + "', strength_of_feeling = '" + str(strength_of_feeling) + "'  WHERE user_id = '" + str(user_email) + "'")
-
-    mysql.connection.commit()
-
-    result = {
-        'user_id': user_email,
-        'paragraph': paragraph,
-        'strength_of_feeling': strength_of_feeling,
-        'modified_data_time': modified_data_time
-    }
-
-    return jsonify({'result': result})
-
-
 @app.route('/post_remove', methods=['POST'])
 @jwt_required
 def post_remove():
@@ -124,8 +101,9 @@ def post_remove():
     user_email = get_jwt_identity()['user_email']
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
+    removed_data_time = datetime.utcnow()
 
-    cur.executecur.execute("DELETE FROM user_post WHERE paragraph = '" + str(paragraph) + "'")
+    cur.execute("DELETE FROM user_post WHERE user_email = '" + str(user_email) + "' and paragraph = '" + str(paragraph) + "'")
 
     mysql.connection.commit()
 
@@ -133,13 +111,13 @@ def post_remove():
         'user_id': user_email,
         'paragraph': paragraph,
         'strength_of_feeling': strength_of_feeling,
-        # 'removed_data_time': removed_data_time
+        'removed_data_time': removed_data_time
     }
 
     return jsonify({'result': result})
 
 
-@app.route('/summary_input', method=['POST'])
+@app.route('/summary_input', methods=['POST'])
 @jwt_required
 def output():
     cur = mysql.connection.cursor()
