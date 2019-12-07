@@ -16,10 +16,10 @@ class NormalLoginForm extends Component {
     }).then(res => {
       // console.log(res.data)
       localStorage.setItem("token", res.data.token);
-      this.setState({
-        setIsLogined : this.setIsLogined
-      }) 
-      // console.log(this.props.setIsLogined)
+      // this.setState({
+      //   setIsLogined : this.setIsLogined
+      // }) 
+      console.log(this.props.setIsLogined)
       // this.props.setIsLogined(true);
       this.props.history.push("/post/write");
     }).catch((error) => {
@@ -69,7 +69,6 @@ class NormalLoginForm extends Component {
               </Button>
               <div className="shortcut flex">
                 <Link to="/signup">회원가입</Link>
-                <Link to="">비밀번호 찾기</Link>
               </div>
             </Form.Item>
           </Form>
