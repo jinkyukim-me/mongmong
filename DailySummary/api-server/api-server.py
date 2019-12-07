@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, json
 from flask_mysqldb import MySQL
 from datetime import datetime
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import (JWTManager, jwt_required, jwt_optional, create_access_token, get_jwt_identity, get_jwt_claims)
 
@@ -17,7 +17,7 @@ mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # from flask import Flask, request, jsonify
 # from flask_cors import CORS
@@ -158,8 +158,7 @@ CORS(app)
 #     return jsonify({"onesentence": sentiment_sent})  # 받아온 데이터를 다시 전송
 
 
-@app.route('/login', methods=['POST'])
-@cross_origin
+@app.route('/api/login', methods=['POST'])
 def login():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
@@ -176,8 +175,7 @@ def login():
     return result
 
 
-@app.route('/password_reset', methods=['POST'])
-@cross_origin
+@app.route('/api/password_reset', methods=['POST'])
 @jwt_required
 def password_reset():
     cur = mysql.connection.cursor()
@@ -194,8 +192,7 @@ def password_reset():
     return result
 
 
-@app.route('/register', methods=['POST'])
-@cross_origin
+@app.route('/api/register', methods=['POST'])
 def register():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
@@ -208,8 +205,7 @@ def register():
     return jsonify({'result' : result})
 
 
-@app.route('/post_input', methods=['POST'])
-@cross_origin
+@app.route('/api/post_input', methods=['POST'])
 @jwt_required
 def post_input():
     cur = mysql.connection.cursor()
@@ -236,8 +232,7 @@ def post_input():
     return jsonify({'result': result})
 
 
-@app.route('/post_remove', methods=['POST'])
-@cross_origin
+@app.route('/api/post_remove', methods=['POST'])
 @jwt_required
 def post_remove():
     cur = mysql.connection.cursor()
@@ -260,8 +255,7 @@ def post_remove():
     return jsonify({'result': result})
 
 
-@app.route('/summary_input', methods=['POST'])
-@cross_origin
+@app.route('/api/summary_input', methods=['POST'])
 @jwt_required
 def output():
     cur = mysql.connection.cursor()
