@@ -39,14 +39,7 @@ def login():
     
     return result
 
-@app.route('/api/v1/resources/books/all', methods=['GET'])
-def api_all():
-    conn = sqlite3.connect('books.db')
-    conn.row_factory = dict_factory
-    cur = conn.cursor()
-    all_books = cur.execute('SELECT * FROM books;').fetchall()
 
-    return jsonify(all_books)
 
 @app.route('/register', methods=['POST'])
 def register():
