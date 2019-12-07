@@ -133,11 +133,14 @@ class Write extends Component {
   };
 
   handleOk = e => { 
-    axios.post(config.serverUrl + "/api/posts", {
-      paragraph: this.state.paragraph,
-      affectivity: this.state.affectivity,
-     })
-  // 헤더에 토큰 담기 로직  필요.
+    axios.post(config.serverUrl + "/post_input",
+      {
+        headers: {token: localStorage.token}
+      } , 
+      {
+        paragraph: this.state.paragraph,
+        strength_of_feeling: this.state.affectivity,
+      })
      .then((response) => {       
       console.log(this.state)  
       alert("당신의 소중한 하루가 저장되었습니다.")  

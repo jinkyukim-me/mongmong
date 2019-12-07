@@ -12,11 +12,11 @@ const randomTxt = () => {
   return texts[num];
 }
 
-const randomImg = () => {
-  const num = Math.floor(Math.random() * 3 + 1);
+// const randomImg = () => {
+//   const num = Math.floor(Math.random() * 3 + 1);
   
-  return num;
-}
+//   return num;
+// }
 
 class Home extends Component {
   render() {
@@ -24,7 +24,7 @@ class Home extends Component {
       <>  
         <div className="container one-welcome flex flex-center">
           <div className="txt">{randomTxt()}</div>
-          <img src={`images/${randomImg()}.jpg`} alt="" className="img position-center" />
+          {/* <img src={`images/${randomImg()}.jpg`} alt="" className="img position-center" /> */}
           <Link to="/login" className="btn-wrap">
             <Button shape="circle" icon="right-circle" className="btn btn-shortcut" />
           </Link>

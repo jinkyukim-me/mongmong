@@ -13,6 +13,26 @@ class Settings extends Component {
     autoCompleteResult: [],
   };
 
+  // resetBtnClicked () {
+  //   axios.post(config.serverUrl + '/password_reset', 
+  //   {
+  //     headers: {token: localStorage.token}
+  //   }, 
+  //   {
+  //     user_password: this.state.password,
+  //   }).then(res => {      
+  //     console.log(res.result)
+  //     this.props.history.push("/posts");
+  //   }).catch((error) => {
+  //     if (error.response) {
+  //       alert(error.response.status + ": " + 
+  //             error.response.data.message);
+  //     } else {
+  //       alert(error);
+  //     }
+  //   })
+  // }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -21,9 +41,8 @@ class Settings extends Component {
       }
       
       axios.post(config.serverUrl + '/password_reset', {
-        user_email: 'haha@gmail.com',
-        // user_email: values.email,
-        user_password: values.password,
+        headers: {token: localStorage.token},
+        user_password: this.state.password,
       }).then(res => {      
         console.log(res.result)
         this.props.history.push("/posts");
@@ -35,6 +54,22 @@ class Settings extends Component {
           alert(error);
         }
       })
+      
+      // axios.post(config.serverUrl + '/password_reset', {
+      //   user_email: 'haha@gmail.com',
+      //   // user_email: values.email,
+      //   user_password: values.password,
+      // }).then(res => {      
+      //   console.log(res.result)
+      //   this.props.history.push("/posts");
+      // }).catch((error) => {
+      //   if (error.response) {
+      //     alert(error.response.status + ": " + 
+      //           error.response.data.message);
+      //   } else {
+      //     alert(error);
+      //   }
+      // })
     });
   };
 
