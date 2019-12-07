@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, json
 from flask_mysqldb import MySQL
 from datetime import datetime
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import (JWTManager, jwt_required, jwt_optional, create_access_token, get_jwt_identity, get_jwt_claims)
 
@@ -159,6 +159,7 @@ CORS(app)
 
 
 @app.route('/login', methods=['POST'])
+@cross_origin
 def login():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
@@ -176,6 +177,7 @@ def login():
 
 
 @app.route('/password_reset', methods=['POST'])
+@cross_origin
 @jwt_required
 def password_reset():
     cur = mysql.connection.cursor()
@@ -193,6 +195,7 @@ def password_reset():
 
 
 @app.route('/register', methods=['POST'])
+@cross_origin
 def register():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
@@ -206,6 +209,7 @@ def register():
 
 
 @app.route('/post_input', methods=['POST'])
+@cross_origin
 @jwt_required
 def post_input():
     cur = mysql.connection.cursor()
@@ -233,6 +237,7 @@ def post_input():
 
 
 @app.route('/post_remove', methods=['POST'])
+@cross_origin
 @jwt_required
 def post_remove():
     cur = mysql.connection.cursor()
@@ -256,6 +261,7 @@ def post_remove():
 
 
 @app.route('/summary_input', methods=['POST'])
+@cross_origin
 @jwt_required
 def output():
     cur = mysql.connection.cursor()
