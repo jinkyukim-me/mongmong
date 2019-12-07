@@ -18,6 +18,7 @@ mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # from flask import Flask, request, jsonify
 # from flask_cors import CORS
@@ -158,7 +159,7 @@ jwt = JWTManager(app)
 #     return jsonify({"onesentence": sentiment_sent})  # 받아온 데이터를 다시 전송
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
@@ -175,7 +176,7 @@ def login():
     return result
 
 
-@app.route('/password_reset', methods=['POST'])
+@app.route('/api/password_reset', methods=['POST'])
 @jwt_required
 def password_reset():
     cur = mysql.connection.cursor()
@@ -192,7 +193,7 @@ def password_reset():
     return result
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def register():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
@@ -205,7 +206,7 @@ def register():
     return jsonify({'result' : result})
 
 
-@app.route('/post_input', methods=['POST'])
+@app.route('/api/post_input', methods=['POST'])
 @jwt_required
 def post_input():
     cur = mysql.connection.cursor()
@@ -232,7 +233,7 @@ def post_input():
     return jsonify({'result': result})
 
 
-@app.route('/post_remove', methods=['POST'])
+@app.route('/api/post_remove', methods=['POST'])
 @jwt_required
 def post_remove():
     cur = mysql.connection.cursor()
@@ -255,7 +256,7 @@ def post_remove():
     return jsonify({'result': result})
 
 
-@app.route('/summary_input', methods=['POST'])
+@app.route('/api/summary_input', methods=['POST'])
 @jwt_required
 def output():
     cur = mysql.connection.cursor()
