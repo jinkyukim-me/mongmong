@@ -92,14 +92,14 @@ class App extends Component {
     });
   };
 
-  writeBtnClicked = e => {
-    console.log(e)
-    if(this.state.isLogined) {
-      this.props.history.push('/post/write')
-    } else {
-      this.props.history.push('/login')
-    }
-  }
+  // writeBtnClicked = e => {
+  //   console.log(e)
+  //   if(this.state.isLogined) {
+  //     this.props.history.push('/post/write')
+  //   } else {
+  //     this.props.history.push('/login')
+  //   }
+  // }
 
   render () {
     return (
@@ -127,8 +127,10 @@ class App extends Component {
             </div>
               <Menu theme="light" mode="inline" className="one-nav">
                 <Menu.Item key="1" className="menuWrite"  onClick={this.writeBtnClicked}>
+                  <Link to='/post/write'> 
                     <Icon type="form" />
                     <span className="nav-text">글쓰기</span>
+                  </Link>
                 </Menu.Item>
                 <SubMenu
                   key="Sub1"
@@ -190,8 +192,8 @@ class App extends Component {
             <Layout className="one-main">
               <HeaderLayout />
               <Content className="Content-section-layout one-content">
-                {/* {
-                  this.state.isLogined ? (  */}
+                {
+                  this.state.isLogined ? ( 
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route path="/posts/:year/:month/:day" component={PostList} />
@@ -208,10 +210,25 @@ class App extends Component {
                       <Route path="/unsubscribe" component={Unsubscribe} />
                       <Route component={NotFound} />
                     </Switch>
-                  {/* // ) : (
-                  //   <NormalLoginForm />
-                  // )
-                } */}
+                   ) : (
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route path="/posts/:year/:month/:day" component={NormalLoginForm} />
+                      <Route path="/posts/:year/:month" component={NormalLoginForm} />
+                      <Route path="/posts/:year" component={NormalLoginForm} />
+                      <Route path="/posts" component={NormalLoginForm} />
+                      <Route path="/post/write" component={NormalLoginForm} />
+                      <Route path="/post/:view" component={NormalLoginForm} />
+                      <Route path="/summary/:year/:month/:day" component={NormalLoginForm} />
+                      <Route path="/summary" component={NormalLoginForm} />
+                      <Route path="/setting" component={NormalLoginForm} />
+                      <Route path="/signup" component={SignUp} />
+                      <Route path="/login" component={NormalLoginForm} />
+                      <Route path="/unsubscribe" component={NormalLoginForm} />
+                      <Route component={NotFound} />
+                    </Switch>
+                   )
+                }
               </Content>
               <Footer style={{ textAlign: 'center' }}>ㅁㅗㅇㄱㅡㄹ ©2019 Created by 한:글</Footer>
             </Layout>
