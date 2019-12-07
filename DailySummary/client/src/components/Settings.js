@@ -14,8 +14,11 @@ class Settings extends Component {
   };
 
   resetBtnClicked () {
-    axios.post(config.serverUrl + '/password_reset', {
-      user_email: this.state.email,
+    axios.post(config.serverUrl + '/password_reset', 
+    {
+      headers: {token: localStorage.token}
+    }, 
+    {
       user_password: this.state.password,
     }).then(res => {      
       console.log(res.result)

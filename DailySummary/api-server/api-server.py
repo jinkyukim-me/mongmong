@@ -212,6 +212,7 @@ def register():
 
 #####
 
+<<<<<<< HEAD
 # @app.route('/post/input', methods=['POST'])
 # def input():
 #     cur = mysql.connection.cursor()
@@ -289,7 +290,99 @@ def register():
 #
 #     return jsonify({'result': result})
 #
+=======
+@app.route('/post_input', methods=['POST'])
+def input():
+    cur = mysql.connection.cursor()
+    user_id = request.get_json()['user_id']
+    paragraph = request.get_json()['paragraph']
+    strength_of_feeling = request.get_json()['strength_of_feeling']
+    created_data_time = datetime.utcnow()
 
+    cur.execute("INSERT INTO user_post (user_id, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
+                str(user_id) + "', '" +
+                str(paragraph) + "', '" +
+                str(strength_of_feeling) + "', '" +
+                str(created_data_time) + "')")
+
+    mysql.connection.commit()
+
+    result = {
+        'user_id': user_id,
+        'paragraph': paragraph,
+        'strength_of_feeling': strength_of_feeling,
+        'created_data_time': created_data_time
+    }
+
+    return jsonify({'result': result})
+
+
+@app.route('/post_edit', methods=['post'])
+def input():
+    cur = mysql.connection.cursor()
+    paragraph = request.get_json()['paragraph']
+    strength_of_feeling = request.get_json()['strength_of_feeling']
+    modified_data_time = datetime.utcnow()
+
+    cur.executecur.execute("UPDATE user_post SET paragraph = '" + str(paragraph) + "', strength_of_feeling = '" + str(strength_of_feeling) + "'  WHERE user_id = '" + str(user_id) + "'")
+
+    mysql.connection.commit()
+
+    result = {
+        'user_id': user_id,
+        'paragraph': paragraph,
+        'strength_of_feeling': strength_of_feeling,
+        'modified_data_time': modified_data_time
+    }
+
+    return jsonify({'result': result})
+
+
+@app.route('/post_remove', methods=['POST'])
+def input():
+    cur = mysql.connection.cursor()
+
+
+    cur.executecur.execute("DELETE FROM user_post WHERE paragraph = '" + str(paragraph) + "'")
+
+    mysql.connection.commit()
+
+    result = {
+        'user_id': user_id,
+        'paragraph': paragraph,
+        'strength_of_feeling': strength_of_feeling,
+        'removed_data_time': removed_data_time
+    }
+
+    return jsonify({'result': result})
+
+>>>>>>> d6bea5d83f70523e1be2896f3527df9d6e6a8c7f
+
+@app.route('/summary_input', method=['POST'])
+def output():
+    cur = mysql.connection.cursor()
+    user_email = request.get_json()['user_email']
+    paragraph = request.get_json()['paragraph']
+    strength_of_feeling = request.get_json()['strength_of_feeling']
+    created_data_time = datetime.utcnow()
+
+    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" + 
+    str(user_email) + "', '" +
+    str(paragraph) + "', '" +
+    str(strength_of_feeling) + "', '" + 
+    str(created_data_time) + "')")
+
+    mysql.connection.commit()
+    
+
+    result = {
+        'user_email' : user_email,
+        'paragraph' : paragraph,
+        'strength_of_feeling' : strength_of_feeling,
+        'created_data_time' : created_data_time
+    }
+
+    return jsonify({'result' : result})
 
 if __name__ == '__main__':
     app.run(debug=True)
