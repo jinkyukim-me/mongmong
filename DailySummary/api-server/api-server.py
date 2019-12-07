@@ -182,9 +182,10 @@ def get_username():
 
 
 @app.route('/password_reset', methods=['POST'])
+@jwt_required
 def password_reset():
     cur = mysql.connection.cursor()
-    user_email = request.get_json()['user_email']
+    user_email = get_jwt_identity()['user_email']
     user_password = request.get_json()['user_password']
     new_password = bcrypt.generate_password_hash(request.get_json()['user_password']).decode('utf-8')
     created_data_time = datetime.utcnow()
@@ -192,6 +193,7 @@ def password_reset():
     mysql.connection.commit()
     result = {
       'user_password' : user_password,
+        'new_password' : new_password
     }
     return result
 
@@ -210,83 +212,83 @@ def register():
 
 #####
 
-@app.route('/post/input', methods=['POST'])
-def input():
-    cur = mysql.connection.cursor()
-    user_email = request.get_json()['user_email']
-    paragraph = request.get_json()['paragraph']
-    strength_of_feeling = request.get_json()['strength_of_feeling']
-    created_data_time = datetime.utcnow()
-
-    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
-                str(user_email) + "', '" +
-                str(paragraph) + "', '" +
-                str(strength_of_feeling) + "', '" +
-                str(created_data_time) + "')")
-
-    mysql.connection.commit()
-
-    result = {
-        'user_email': user_email,
-        'paragraph': paragraph,
-        'strength_of_feeling': strength_of_feeling,
-        'created_data_time': created_data_time
-    }
-
-    return jsonify({'result': result})
-
-
-@app.route('/post/edit', methods=['post'])
-def input():
-    cur = mysql.connection.cursor()
-    user_email = request.get_json()['user_email']
-    paragraph = request.get_json()['paragraph']
-    strength_of_feeling = request.get_json()['strength_of_feeling']
-    modified_data_time = datetime.utcnow()
-
-    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, modified_data_time) VALUES ('" +
-                str(user_email) + "', '" +
-                str(paragraph) + "', '" +
-                str(strength_of_feeling) + "', '" +
-                str(modified_data_time) + "')")
-
-    mysql.connection.commit()
-
-    result = {
-        'user_email': user_email,
-        'paragraph': paragraph,
-        'strength_of_feeling': strength_of_feeling,
-        'modified_data_time': modified_data_time
-    }
-
-    return jsonify({'result': result})
-
-
-@app.route('/post/remove', methods=['POST'])
-def input():
-    cur = mysql.connection.cursor()
-    user_email = request.get_json()['user_email']
-    paragraph = request.get_json()['paragraph']
-    strength_of_feeling = request.get_json()['strength_of_feeling']
-    created_data_time = datetime.utcnow()
-
-    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
-                str(user_email) + "', '" +
-                str(paragraph) + "', '" +
-                str(strength_of_feeling) + "', '" +
-                str(created_data_time) + "')")
-
-    mysql.connection.commit()
-
-    result = {
-        'user_email': user_email,
-        'paragraph': paragraph,
-        'strength_of_feeling': strength_of_feeling,
-        'created_data_time': created_data_time
-    }
-
-    return jsonify({'result': result})
-
+# @app.route('/post/input', methods=['POST'])
+# def input():
+#     cur = mysql.connection.cursor()
+#     user_email = request.get_json()['user_email']
+#     paragraph = request.get_json()['paragraph']
+#     strength_of_feeling = request.get_json()['strength_of_feeling']
+#     created_data_time = datetime.utcnow()
+#
+#     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
+#                 str(user_email) + "', '" +
+#                 str(paragraph) + "', '" +
+#                 str(strength_of_feeling) + "', '" +
+#                 str(created_data_time) + "')")
+#
+#     mysql.connection.commit()
+#
+#     result = {
+#         'user_email': user_email,
+#         'paragraph': paragraph,
+#         'strength_of_feeling': strength_of_feeling,
+#         'created_data_time': created_data_time
+#     }
+#
+#     return jsonify({'result': result})
+#
+#
+# @app.route('/post/edit', methods=['post'])
+# def input():
+#     cur = mysql.connection.cursor()
+#     user_email = request.get_json()['user_email']
+#     paragraph = request.get_json()['paragraph']
+#     strength_of_feeling = request.get_json()['strength_of_feeling']
+#     modified_data_time = datetime.utcnow()
+#
+#     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, modified_data_time) VALUES ('" +
+#                 str(user_email) + "', '" +
+#                 str(paragraph) + "', '" +
+#                 str(strength_of_feeling) + "', '" +
+#                 str(modified_data_time) + "')")
+#
+#     mysql.connection.commit()
+#
+#     result = {
+#         'user_email': user_email,
+#         'paragraph': paragraph,
+#         'strength_of_feeling': strength_of_feeling,
+#         'modified_data_time': modified_data_time
+#     }
+#
+#     return jsonify({'result': result})
+#
+#
+# @app.route('/post/remove', methods=['POST'])
+# def input():
+#     cur = mysql.connection.cursor()
+#     user_email = request.get_json()['user_email']
+#     paragraph = request.get_json()['paragraph']
+#     strength_of_feeling = request.get_json()['strength_of_feeling']
+#     created_data_time = datetime.utcnow()
+#
+#     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
+#                 str(user_email) + "', '" +
+#                 str(paragraph) + "', '" +
+#                 str(strength_of_feeling) + "', '" +
+#                 str(created_data_time) + "')")
+#
+#     mysql.connection.commit()
+#
+#     result = {
+#         'user_email': user_email,
+#         'paragraph': paragraph,
+#         'strength_of_feeling': strength_of_feeling,
+#         'created_data_time': created_data_time
+#     }
+#
+#     return jsonify({'result': result})
+#
 
 
 if __name__ == '__main__':
