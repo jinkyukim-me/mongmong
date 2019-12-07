@@ -13,11 +13,11 @@ app.config['MYSQL_DB'] = 'diarydb'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['JWT_SECRET_KEY'] = 'secret'
 
+CORS(app)
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-CORS(app)
 
 # from flask import Flask, request, jsonify
 # from flask_cors import CORS
