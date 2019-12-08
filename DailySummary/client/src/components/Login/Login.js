@@ -10,16 +10,16 @@ class NormalLoginForm extends Component {
 
   login = (email, password) => {
     // axios.post(config.serverUrl + '/api/auth/token', {
-    axios.post(config.serverUrl + '/login', {
+    axios.post(config.serverUrl + '/api/login', {
       user_email: email,
       user_password: password,
     }).then(res => {
       // console.log(res.data)
       localStorage.setItem("token", res.data.token);
-      // this.setState({
-      //   setIsLogined : this.setIsLogined
-      // }) 
-      console.log(this.props.setIsLogined)
+      this.setState({
+        setIsLogined : this.setIsLogined
+      }) 
+      console.log(this.setIsLogined)
       // this.props.setIsLogined(true);
       this.props.history.push("/post/write");
     }).catch((error) => {

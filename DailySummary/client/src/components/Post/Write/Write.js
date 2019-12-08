@@ -133,13 +133,13 @@ class Write extends Component {
   };
 
   handleOk = e => { 
-    axios.post(config.serverUrl + "/post_input",
+    axios.post(config.serverUrl + "/api/post_input",
       {
-        headers: {token: localStorage.token}
-      } , 
+        params : { paragraph: this.state.paragraph,
+                  strength_of_feeling: this.state.affectivity},
+      },
       {
-        paragraph: this.state.paragraph,
-        strength_of_feeling: this.state.affectivity,
+        headers: { token: localStorage.token },
       })
      .then((response) => {       
       console.log(this.state)  
