@@ -9,17 +9,16 @@ const config = require('../../config');
 class NormalLoginForm extends Component {
 
   login = (email, password) => {
-    // axios.post(config.serverUrl + '/api/auth/token', {
     axios.post(config.serverUrl + '/api/login', {
       user_email: email,
       user_password: password,
     }).then(res => {
-      // console.log(res.data)
+      console.log(res.data)
       localStorage.setItem("token", res.data.token);
       // this.setState({
       //   setIsLogined : this.setIsLogined
       // }) 
-      // console.log(this.props.setIsLogined)
+      console.log(this.props.setIsLogined)
       // this.props.setIsLogined(true);
       this.props.history.push("/post/write");
     }).catch((error) => {
@@ -39,9 +38,11 @@ class NormalLoginForm extends Component {
       if (!err) {
         const { mail, password } = values
         this.login(mail, password)
-      }
+      }   
     });
   };
+
+  
 
   render() {
   const { getFieldDecorator } = this.props.form

@@ -4,6 +4,7 @@ from datetime import datetime
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import (JWTManager, jwt_required, jwt_optional, create_access_token, get_jwt_identity, get_jwt_claims)
+
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = '1sentence.ml'
 app.config['MYSQL_USER'] = '1sentence'
@@ -11,10 +12,14 @@ app.config['MYSQL_PASSWORD'] = '1sen'
 app.config['MYSQL_DB'] = 'diarydb'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['JWT_SECRET_KEY'] = 'secret'
+
+CORS(app)
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
+
 CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 # from flask import Flask, request, jsonify
 # from flask_cors import CORS
 # from krwordrank.sentence import summarize_with_sentences
@@ -152,6 +157,8 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 #     sentiment_sent = before_sentiment[a]
 #
 #     return jsonify({"onesentence": sentiment_sent})  # 받아온 데이터를 다시 전송
+
+
 @app.route('/api/login', methods=['POST'])
 def login():
     cur = mysql.connection.cursor()
@@ -165,7 +172,10 @@ def login():
         result = jsonify({"token":access_token})
     else:
         result = jsonify({"error":"Invalid username and password"})
+
     return result
+
+
 @app.route('/api/password_reset', methods=['POST'])
 @jwt_required
 def password_reset():
@@ -181,6 +191,8 @@ def password_reset():
         'new_password' : new_password
     }
     return result
+
+
 @app.route('/api/register', methods=['POST'])
 def register():
     cur = mysql.connection.cursor()
@@ -190,7 +202,10 @@ def register():
     cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
     mysql.connection.commit()
     result = {'user_email' : user_email,'user_password' : user_password,'created_data_time' : created_data_time}
+
     return jsonify({'result' : result})
+
+
 @app.route('/api/post_input', methods=['POST'])
 @jwt_required
 def post_input():
@@ -199,19 +214,25 @@ def post_input():
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
     created_data_time = datetime.utcnow()
+
     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
                 str(user_email) + "', '" +
                 str(paragraph) + "', '" +
                 str(strength_of_feeling) + "', '" +
                 str(created_data_time) + "')")
+
     mysql.connection.commit()
+
     result = {
         'user_email': user_email,
         'paragraph': paragraph,
         'strength_of_feeling': strength_of_feeling,
         'created_data_time': created_data_time
     }
+
     return jsonify({'result': result})
+
+
 @app.route('/api/post_remove', methods=['POST'])
 @jwt_required
 def post_remove():
@@ -220,15 +241,34 @@ def post_remove():
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
     removed_data_time = datetime.utcnow()
+
     cur.execute("DELETE FROM user_post WHERE user_email = '" + str(user_email) + "' and paragraph = '" + str(paragraph) + "'")
+
     mysql.connection.commit()
+
     result = {
-        'user_id': user_email,
+        'user_email': user_email,
         'paragraph': paragraph,
         'strength_of_feeling': strength_of_feeling,
         'removed_data_time': removed_data_time
     }
+
     return jsonify({'result': result})
+
+
+@app.route('/api/post_list', methods=['POST'])
+@jwt_required
+def post_list():
+    cur = mysql.connection.cursor()
+    yyyy = request.get_json()['yyyy']
+    mm = request.get_json()['mm']
+    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE created_data_time between '" + str(yyyy) + "-" + str(mm) + "-% 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-% 23:59:59' ")
+    post =cur.fetchall()
+    mysql.connection.commit()
+
+    return jsonify({'post': post})
+
+
 @app.route('/api/summary_input', methods=['POST'])
 @jwt_required
 def output():
@@ -237,11 +277,13 @@ def output():
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
     created_data_time = datetime.utcnow()
+
     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
     str(user_email) + "', '" +
     str(paragraph) + "', '" +
     str(strength_of_feeling) + "', '" +
     str(created_data_time) + "')")
+
     mysql.connection.commit()
     result = {
             'user_email' : user_email,
@@ -249,6 +291,21 @@ def output():
             'strength_of_feeling' : strength_of_feeling,
             'created_data_time' : created_data_time
         }
+
     return jsonify({'result' : result})
+
+
+@app.route('/api/summary_list', methods=['GET'])
+@jwt_required
+def summary_list():
+    cur = mysql.connection.cursor()
+
+    cur.execute("SELECT summary_text, created_data_time FROM user_summary")
+    summary_post = cur.fetchall()
+    mysql.connection.commit()
+
+    return jsonify({'result': summary_post})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
