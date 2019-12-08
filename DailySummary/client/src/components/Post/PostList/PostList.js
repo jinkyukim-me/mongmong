@@ -49,8 +49,12 @@ class PostsList extends Component {
     .then((response) => {
       console.log(response.data);
       this.setState({
-        data: response.data,
+        data: response.data.list,
       });
+    })
+    .catch((error) => {
+      console.error(error)
+      alert("에러 발생: " + error.message)
     })
   };
 
@@ -79,7 +83,7 @@ class PostsList extends Component {
   renderItem = (item) => {
     return (
       <List.Item key={item.userEmail}>
-        <List.Item.Meta title={<a href={"/post/"+item.postId}>{item.createdDt}</a>} className="list-item-wrap" />
+        <List.Item.Meta title={<a href={"/post/"+item.created_data_time}>{item.created_data_time}</a>} className="list-item-wrap" />
         <div>{item.paragraph}</div>
       </List.Item>
     );

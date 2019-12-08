@@ -3,7 +3,7 @@ import './App.scss'
 import Home from './components/Home/Home'
 import HeaderLayout from './components/HeaderLayout'
 import Write from './components/Post/Write/Write'
-import { Route, Switch, Link, withRouter, Redirect } from 'react-router-dom'
+import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import NormalLoginForm from './components/Login/Login'
 import { Modal, Layout, Menu, Icon, DatePicker } from 'antd'
 import PostList from './components/Post/PostList/PostList'
@@ -13,14 +13,11 @@ import SignUp from './components/Login/SignUp'
 import Unsubscribe from './components/Login/Unsubscribe'
 import Review from './components/Post/Write/Review'
 import Summary from './components/Post/Summary/Summary'
-import axios from 'axios'
 import { LoginContext } from './contexts/login'
 
 const { Sider, Content, Footer } = Layout
 const { SubMenu } = Menu
 const { MonthPicker } = DatePicker;
-
-const config = require('./config');
 
 class App extends Component {
 
@@ -201,7 +198,7 @@ class App extends Component {
                       <Route path="/posts/:year" component={PostList} />
                       <Route path="/posts" component={PostList} />
                       <Route path="/post/write" component={Write} />
-                      <Route path="/post/:view" component={Review} />
+                      <Route path="/post/:year/:month/:day" component={Review} />
                       <Route path="/summary/:year/:month/:day" component={Summary} />
                       <Route path="/summary" component={Summary} />
                       <Route path="/setting" component={Settings} />
@@ -218,7 +215,7 @@ class App extends Component {
                       <Route path="/posts/:year" component={NormalLoginForm} />
                       <Route path="/posts" component={NormalLoginForm} />
                       <Route path="/post/write" component={NormalLoginForm} />
-                      <Route path="/post/:view" component={NormalLoginForm} />
+                      <Route path="/post/:year/:month/:day" component={NormalLoginForm} />
                       <Route path="/summary/:year/:month/:day" component={NormalLoginForm} />
                       <Route path="/summary" component={NormalLoginForm} />
                       <Route path="/setting" component={NormalLoginForm} />

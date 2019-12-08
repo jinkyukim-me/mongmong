@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'antd';
-import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const config = require('../../../config');
@@ -47,17 +46,27 @@ class Review extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(config.serverUrl + '/api/post_list_day',{
-      params: { dd: this.state.ddyyyy}
-    },
-    {
-      headers: { token: localStorage.token },
-    })
+    axios.post(config.serverUrl + '/api/post_list_day',
+      {
+        yyyy: this.props.match.params.year,
+        mm: this.props.match.params.month,
+        dd: this.props.match.params.day,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      },
+    })    
     .then((response) => {
       console.log(response.data);
       this.setState({
-        data: response.data,
+        data: response.data.list,
       });
+    })
+    .catch((error) => {
+      console.error(error)
+      alert("에러 발생: " + error.message)
     })
   }
 
@@ -69,10 +78,10 @@ class Review extends Component {
           <p className="one-selected-date flex"
             // type="date"           
           >
-          {this.state.data.createdDt}
+          {this.state.data.created_data_time}
           </p>
           <div className="one-selected-emotion flex" type="input">
-            {this.state.data.affectivity}
+            {this.state.data.strength_of_feeling}
           </div>
         </div>
         <p className="one-selected-textarea"> 

@@ -31,7 +31,7 @@ class Summary extends Component {
     let url = config.serverUrl +'/api/posts/';
     url += year !== '' ? year + '/' : '';
     url += month !== '' ? month + '/' : '';
-    url += day == '' ? day + '/' : '';
+    url += day === '' ? day + '/' : '';
     
     console.log(url);
 

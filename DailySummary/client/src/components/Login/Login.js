@@ -23,20 +23,17 @@ class NormalLoginForm extends Component {
       user_password: password,
     }).then(res => {
       console.log(res.data)
-      console.log(this.isLogined)
+      console.log(this.state.isLogined)
       localStorage.setItem("token", res.data.token);
-      // this.setState({
-      //   isLogined: true
-      // })
-      if(this.state.isLogined == true) {
-        this.props.history.push("/post/write");
-      }
+      this.setState({
+        isLogined: true
+      })
+      this.props.setIsLogined(true);
+      this.props.history.push("/post/write");
       // this.setState({
       //   isLogined: this.state
       //   // setIsLogined : this.setIsLogined
       // }) 
-      // console.log(this.setIsLogined)
-      // // this.props.setIsLogined(true);
 
     }).catch((error) => {
       if (error.response) {
@@ -96,15 +93,15 @@ class NormalLoginForm extends Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
+const WrappedNormalLoginForm = withRouter(Form.create({ name: 'normal_login' })(NormalLoginForm));
 
 const LoginContainer = () => (
-  <LoginContext.Consumer>
-   {
-     ({login}) => 
-     <WrappedNormalLoginForm setIsLogined={login} />
-   }
-  </LoginContext.Consumer>
+    <LoginContext.Consumer>
+    {
+      ({setIsLogined}) => 
+      <WrappedNormalLoginForm setIsLogined={setIsLogined} />
+    }
+    </LoginContext.Consumer>
 );
 
-export default withRouter(WrappedNormalLoginForm);
+export default withRouter(LoginContainer);

@@ -156,8 +156,8 @@ class Write extends Component {
       this.props.history.push('/posts')       
     })
     .catch((error) => {
-      alert("에러 발생: " + error.message)
       console.error(error)
+      alert("에러 발생: " + error.message)
     })
   }
 
