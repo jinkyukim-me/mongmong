@@ -262,8 +262,7 @@ def post_list():
     user_email = get_jwt_identity()['user_email']
     yyyy = request.get_json()['yyyy']
     mm = request.get_json()['mm']
-    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='" + str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-__ 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-__ 23:59:59' ")
-    # cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='" + str(user_email) + "' and convert(int, convert(char(8), created_data_time, 112)) betwwen ' "+yyyy+""+mm+""%"' and '
+    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-01 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-31 23:59:59'")
 
     post =cur.fetchall()
     mysql.connection.commit()
@@ -297,16 +296,20 @@ def output():
     return jsonify({'result' : result})
 
 
-@app.route('/api/summary_list', methods=['GET'])
+@app.route('/api/summary_list', methods=['POST'])
 @jwt_required
 def summary_list():
     cur = mysql.connection.cursor()
+    user_email = get_jwt_identity()['user_email']
+    yyyy = request.get_json()['yyyy']
+    mm = request.get_json()['mm']
+    dd = request.get_json()['dd']
+    cur.execute("SELECT summary_text, created_data_time FROM user_summary WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
 
-    cur.execute("SELECT summary_text, created_data_time FROM user_summary")
-    summary_post = cur.fetchall()
+    post = cur.fetchall()
     mysql.connection.commit()
 
-    return jsonify({'result': summary_post})
+    return jsonify({'post': post})
 
 
 if __name__ == '__main__':
