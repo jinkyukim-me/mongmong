@@ -48,6 +48,9 @@ class Review extends Component {
 
   componentDidMount = () => {
     axios.get(config.serverUrl + '/api/post_list_day',{
+      params: { dd: this.state.ddyyyy}
+    },
+    {
       headers: { token: localStorage.token },
     })
     .then((response) => {

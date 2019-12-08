@@ -22,6 +22,7 @@ class NormalLoginForm extends Component {
       user_email: email,
       user_password: password,
     }).then(res => {
+      console.log(res.data)
       console.log(this.isLogined)
       localStorage.setItem("token", res.data.token);
       // this.setState({

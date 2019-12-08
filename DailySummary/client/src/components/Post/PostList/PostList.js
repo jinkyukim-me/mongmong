@@ -35,8 +35,16 @@ class PostsList extends Component {
     
     console.log(url);
 
-     axios.post(config.serverUrl + "/api/post_list", {
-      headers: { token: localStorage.token },
+     axios.post(config.serverUrl + "/api/post_list", 
+      {
+        yyyy: this.props.match.params.year,
+        mm: this.props.match.params.month,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      },
     })    
     .then((response) => {
       console.log(response.data);

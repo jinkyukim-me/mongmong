@@ -136,11 +136,14 @@ class Write extends Component {
     console.log(this.state)
     axios.post(config.serverUrl + "/api/post_input",
       {
-        params : { paragraph: this.state.paragraph,
-                  strength_of_feeling: this.state.affectivity},
+        paragraph: this.state.paragraph,
+        strength_of_feeling: this.state.affectivity,
       },
       {
-        headers: { token: localStorage.token },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+        },
       })
      .then((response) => {       
       console.log(this.state)  
