@@ -15,6 +15,7 @@ from keras.utils.np_utils import to_categorical
 from keras.models import model_from_json
 from krwordrank.sentence import summarize_with_sentences
 from konlpy.tag import Okt
+import datetime
 okt = Okt()
 
 app = Flask(__name__)
