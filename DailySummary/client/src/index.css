@@ -74,26 +74,12 @@ code {
 /* 제목 글씨체 */
 @import url('https://fonts.googleapis.com/css?family=Single+Day&display=swap&subset=korean');
 
+/* import font face */
 @font-face {
-  font-family: 'maple-story';
-  src: url(./fonts/MaplestoryLight.ttf) format(truetype),
-       url(./fonts/MaplestoryLight.woff) format(woff),
-       url(./fonts/MaplestoryLight.svg) format(svg),
-       url(./fonts/MaplestoryOTFLight.otf) format(opentype);
+  font-family: "maple-story";
+  src: url("./fonts/MaplestoryLight.woff");
 }
-/* @font-face {
-  font-family: 'maple-story';
-  src: url(./fonts/MaplestoryBold.ttf) format(truetype),
-       url(./fonts/MaplestoryBold.woff) format(woff),
-       url(./fonts/MaplestoryOTFBold.otf) format(opentype);
-  font-weight: bold;
-} */
+
 .ant-layout * {
   font-family: 'maple-story', sans-serif;
-}
-.one-menu-logo span {
-  font-weight: lighter;
-}
-.ant-menu .nav-text {
-  font-weight: lighter;
 }
