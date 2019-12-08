@@ -264,10 +264,26 @@ def post_list():
     mm = request.get_json()['mm']
     cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-01 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-31 23:59:59'")
 
-    post =cur.fetchall()
+    list =cur.fetchall()
     mysql.connection.commit()
 
-    return jsonify({'post': post})
+    return jsonify({'list': list})
+
+
+@app.route('/api/post_list_day', methods=['POST'])
+@jwt_required
+def post_list_day():
+    cur = mysql.connection.cursor()
+    user_email = get_jwt_identity()['user_email']
+    yyyy = request.get_json()['yyyy']
+    mm = request.get_json()['mm']
+    dd = request.get_json()['dd']
+    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
+
+    list = cur.fetchall()
+    mysql.connection.commit()
+
+    return jsonify({'list': list})
 
 
 @app.route('/api/summary_input', methods=['POST'])
@@ -306,10 +322,10 @@ def summary_list():
     dd = request.get_json()['dd']
     cur.execute("SELECT summary_text, created_data_time FROM user_summary WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
 
-    post = cur.fetchall()
+    list = cur.fetchall()
     mysql.connection.commit()
 
-    return jsonify({'post': post})
+    return jsonify({'post': list})
 
 
 if __name__ == '__main__':
