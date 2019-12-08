@@ -34,11 +34,12 @@ class PostsList extends Component {
     //url += day == '' ? day + '/' : '';
     
     console.log(url);
-    axios.get(url, {
-      headers: {token: localStorage.token},
-    })
+
+     axios.post(config.serverUrl + "/api/post_list", {
+      headers: { token: localStorage.token },
+    })    
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
       this.setState({
         data: response.data,
       });
@@ -69,7 +70,7 @@ class PostsList extends Component {
   
   renderItem = (item) => {
     return (
-      <List.Item key={item.postId}>
+      <List.Item key={item.userEmail}>
         <List.Item.Meta title={<a href={"/post/"+item.postId}>{item.createdDt}</a>} className="list-item-wrap" />
         <div>{item.paragraph}</div>
       </List.Item>

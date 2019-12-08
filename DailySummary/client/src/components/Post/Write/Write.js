@@ -133,6 +133,7 @@ class Write extends Component {
   };
 
   handleOk = e => { 
+    console.log(this.state)
     axios.post(config.serverUrl + "/api/post_input",
       {
         params : { paragraph: this.state.paragraph,

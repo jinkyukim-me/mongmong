@@ -205,7 +205,7 @@ class App extends Component {
                       <Route path="/summary/:year/:month/:day" component={Summary} />
                       <Route path="/summary" component={Summary} />
                       <Route path="/setting" component={Settings} />
-                      <Route path="/signup" component={SignUp} />
+                      <Route path="/signup" component={SignUp} /> */}
                       <Route path="/login" component={NormalLoginForm} />
                       <Route path="/unsubscribe" component={Unsubscribe} />
                       <Route component={NotFound} />

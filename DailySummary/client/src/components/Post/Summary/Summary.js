@@ -30,11 +30,12 @@ class Summary extends Component {
     url += month !== '' ? month + '/' : '';
     url += day == '' ? day + '/' : '';
     console.log(url);
-    axios.get(url, {
-      headers: {token: localStorage.token},
-    }    )
+
+    axios.post(config.serverUrl + "/api/summary_list", {
+      headers: { token: localStorage.token },
+    })    
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
       this.setState({
         data: response.data,
       });

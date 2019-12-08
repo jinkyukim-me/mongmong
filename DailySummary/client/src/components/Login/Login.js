@@ -8,19 +8,35 @@ const config = require('../../config');
 
 class NormalLoginForm extends Component {
 
+  state = {    
+    isLogined: localStorage.getItem('token') ? true : false,
+  }
+  
+//   shouldComponentUpdate(nextProps, nextState){
+//     console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
+//     return true;
+// }
+
   login = (email, password) => {
     axios.post(config.serverUrl + '/api/login', {
       user_email: email,
       user_password: password,
     }).then(res => {
-      console.log(res.data)
+      console.log(this.isLogined)
       localStorage.setItem("token", res.data.token);
-      this.setState({
-        setIsLogined : this.setIsLogined
-      }) 
-      console.log(this.setIsLogined)
-      // this.props.setIsLogined(true);
-      this.props.history.push("/post/write");
+      // this.setState({
+      //   isLogined: true
+      // })
+      if(this.state.isLogined == true) {
+        this.props.history.push("/post/write");
+      }
+      // this.setState({
+      //   isLogined: this.state
+      //   // setIsLogined : this.setIsLogined
+      // }) 
+      // console.log(this.setIsLogined)
+      // // this.props.setIsLogined(true);
+
     }).catch((error) => {
       if (error.response) {
         alert(error.response.status + ": " + 
