@@ -73,3 +73,13 @@ code {
 
 /* 제목 글씨체 */
 @import url('https://fonts.googleapis.com/css?family=Single+Day&display=swap&subset=korean');
+
+/* import font face */
+@font-face {
+  font-family: "maple-story";
+  src: url("./fonts/MaplestoryLight.woff");
+}
+
+.ant-layout * {
+  font-family: 'maple-story', sans-serif;
+}

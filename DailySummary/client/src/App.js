@@ -9,7 +9,7 @@ import { Modal, Layout, Menu, Icon, DatePicker } from 'antd'
 import PostList from './components/Post/PostList/PostList'
 import NotFound from './components/NotFound'
 import Settings from './components/Settings'
-import SignUp from './components/Login/SignUp'
+import Register from './components/Login/Register'
 import Unsubscribe from './components/Login/Unsubscribe'
 import Review from './components/Post/Write/Review'
 import Summary from './components/Post/Summary/Summary'
@@ -72,7 +72,7 @@ class App extends Component {
 
   handleOk = e => {
     e.preventDefault();
-    e.stopPropagation();
+    // e.stopPropagation();
     console.log(e);
     localStorage.removeItem("token")
     this.setState({
@@ -92,14 +92,19 @@ class App extends Component {
     });
   };
 
-  // writeBtnClicked = e => {
-  //   console.log(e)
-  //   if(this.state.isLogined) {
-  //     this.props.history.push('/post/write')
-  //   } else {
-  //     this.props.history.push('/login')
-  //   }
-  // }
+  writeBtnClicked = e => {
+    console.log(e)
+    // if(this.state.isLogined) {
+    //   this.props.history.push('/post/write')
+    // } else {
+    //   this.props.history.push('/login')
+    // }
+    this.setState({
+      visible: false,
+    });
+    
+    console.log(this.state.visible);
+  }
 
   render () {
     return (
@@ -205,7 +210,7 @@ class App extends Component {
                       <Route path="/summary/:year/:month/:day" component={Summary} />
                       <Route path="/summary" component={Summary} />
                       <Route path="/setting" component={Settings} />
-                      <Route path="/signup" component={SignUp} />
+                      <Route path="/register" component={Register} />
                       <Route path="/login" component={NormalLoginForm} />
                       <Route path="/unsubscribe" component={Unsubscribe} />
                       <Route component={NotFound} />
@@ -222,9 +227,9 @@ class App extends Component {
                       <Route path="/summary/:year/:month/:day" component={NormalLoginForm} />
                       <Route path="/summary" component={NormalLoginForm} />
                       <Route path="/setting" component={NormalLoginForm} />
-                      <Route path="/signup" component={SignUp} />
+                      <Route path="/register" component={Register} />
                       <Route path="/login" component={NormalLoginForm} />
-                      <Route path="/unsubscribe" component={NormalLoginForm} />
+                      {/* <Route path="/unsubscribe" component={NormalLoginForm} /> */}
                       <Route component={NotFound} />
                     </Switch>
                    )
