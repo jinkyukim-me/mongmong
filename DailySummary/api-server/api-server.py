@@ -24,7 +24,9 @@ app.config['MYSQL_PASSWORD'] = '1sen'
 app.config['MYSQL_DB'] = 'diarydb'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['JWT_SECRET_KEY'] = 'secret'
-app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(days=1)
+app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(seconds=86400)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(seconds=86400)
+app.config['JWT_REFRESH_TOKEN_EXPIRES'] = datetime.timedelta(seconds=2592000)
 
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
