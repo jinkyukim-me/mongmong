@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Layout, Form, Icon, Input, Button } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { LoginContext } from '../../contexts/login';
 
 const config = require('../../config');
@@ -9,12 +9,11 @@ const config = require('../../config');
 class NormalLoginForm extends Component {
 
   login = (email, password) => {
-    // axios.post(config.serverUrl + '/api/auth/token', {
     axios.post(config.serverUrl + '/api/login', {
       user_email: email,
       user_password: password,
     }).then(res => {
-      // console.log(res.data)
+      console.log(res.data)
       localStorage.setItem("token", res.data.token);
       this.setState({
         setIsLogined : this.setIsLogined
@@ -39,9 +38,11 @@ class NormalLoginForm extends Component {
       if (!err) {
         const { mail, password } = values
         this.login(mail, password)
-      }
+      }   
     });
   };
+
+  
 
   render() {
   const { getFieldDecorator } = this.props.form
@@ -89,4 +90,4 @@ const LoginContainer = () => (
   </LoginContext.Consumer>
 );
 
-export default WrappedNormalLoginForm;
+export default withRouter(WrappedNormalLoginForm);

@@ -21,7 +21,7 @@ class SignUpForm extends Component {
         console.log('Received values of form: ', values);
       }
       
-      axios.post(config.serverUrl + '/register', {
+      axios.post(config.serverUrl + '/api/register', {
         user_email: values.email,
         user_password: values.password,
       })
