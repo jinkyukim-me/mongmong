@@ -172,7 +172,7 @@ def login():
         result = jsonify({"token":access_token})
     else:
         result = jsonify({"error":"Invalid username and password"})
-    
+
     return result
 
 
@@ -247,13 +247,26 @@ def post_remove():
     mysql.connection.commit()
 
     result = {
-        'user_id': user_email,
+        'user_email': user_email,
         'paragraph': paragraph,
         'strength_of_feeling': strength_of_feeling,
         'removed_data_time': removed_data_time
     }
 
     return jsonify({'result': result})
+
+
+@app.route('/api/post_list', methods=['POST'])
+@jwt_required
+def post_list():
+    cur = mysql.connection.cursor()
+    yyyy = request.get_json()['yyyy']
+    mm = request.get_json()['mm']
+    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE created_data_time between '" + str(yyyy) + "-" + str(mm) + "-% 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-% 23:59:59' ")
+    post =cur.fetchall()
+    mysql.connection.commit()
+
+    return jsonify({'post': post})
 
 
 @app.route('/api/summary_input', methods=['POST'])
@@ -280,6 +293,18 @@ def output():
         }
 
     return jsonify({'result' : result})
+
+
+@app.route('/api/summary_list', methods=['GET'])
+@jwt_required
+def summary_list():
+    cur = mysql.connection.cursor()
+
+    cur.execute("SELECT summary_text, created_data_time FROM user_summary")
+    summary_post = cur.fetchall()
+    mysql.connection.commit()
+
+    return jsonify({'result': summary_post})
 
 
 if __name__ == '__main__':
