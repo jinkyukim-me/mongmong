@@ -67,7 +67,7 @@ class App extends Component {
     });     
   };
 
-  handleOk = e => {
+  handleLogout = e => {
     e.preventDefault();
     e.stopPropagation();
     console.log(e);
@@ -110,10 +110,10 @@ class App extends Component {
               breakpoint="lg"
               collapsedWidth="0"
               onBreakpoint={broken => {
-                console.log(broken)
+                
               }}
               onCollapse={(collapsed, type) => {
-                console.log(collapsed, type)
+                
               }}
               className="one-sidebar"
             >
@@ -167,6 +167,8 @@ class App extends Component {
                     <span className="nav-text">설정</span>
                   </Link>
                 </Menu.Item>
+                {
+                  this.state.isLogined ? ( 
                 <Menu.Item key="5"
                   className="one-logout"
                   onClick={this.showModal}
@@ -178,12 +180,23 @@ class App extends Component {
                     <Modal
                       title="Basic Modal"
                       visible={this.state.visible}
-                      onOk={this.handleOk}
+                      onOk={this.handleLogout}
                       onCancel={this.handleCancel}
                     >
                       로그아웃 하시겠습니까?
                     </Modal>   {/* 로그아웃 클릭시 로그인 버튼으로 전환 및 연동 부분 추가 */}
                 </Menu.Item>
+                  ) : (
+                    <Menu.Item key="5"
+                    className="one-login"
+                    >
+                  <Link to="/login">
+                    <Icon type="login" />
+                    <span className="nav-text">로그인</span>
+                  </Link>
+                  </Menu.Item>
+                    )
+                }
               </Menu>
             </Sider>
             <Layout className="one-main">
@@ -198,7 +211,7 @@ class App extends Component {
                       <Route path="/posts/:year" component={PostList} />
                       <Route path="/posts" component={PostList} />
                       <Route path="/post/write" component={Write} />
-                      <Route path="/post/:year/:month/:day" component={Review} />
+                      <Route path="/post/:view" component={Review} />
                       <Route path="/summary/:year/:month/:day" component={Summary} />
                       <Route path="/summary" component={Summary} />
                       <Route path="/setting" component={Settings} />
@@ -215,7 +228,7 @@ class App extends Component {
                       <Route path="/posts/:year" component={NormalLoginForm} />
                       <Route path="/posts" component={NormalLoginForm} />
                       <Route path="/post/write" component={NormalLoginForm} />
-                      <Route path="/post/:year/:month/:day" component={NormalLoginForm} />
+                      <Route path="/post/:view" component={NormalLoginForm} />
                       <Route path="/summary/:year/:month/:day" component={NormalLoginForm} />
                       <Route path="/summary" component={NormalLoginForm} />
                       <Route path="/setting" component={NormalLoginForm} />

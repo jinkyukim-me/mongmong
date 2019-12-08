@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Input, Select, Button, AutoComplete } from 'antd';
+import { Form, Input,  Button  } from 'antd';
 import axios from 'axios';
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 const config = require('../config');
 
 class Settings extends Component {
@@ -76,7 +74,6 @@ class Settings extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

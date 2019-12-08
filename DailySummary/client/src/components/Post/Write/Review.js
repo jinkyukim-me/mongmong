@@ -48,9 +48,7 @@ class Review extends Component {
   componentDidMount = () => {
     axios.post(config.serverUrl + '/api/post_list_day',
       {
-        yyyy: this.props.match.params.year,
-        mm: this.props.match.params.month,
-        dd: this.props.match.params.day,
+        post_id: this.props.match.params.view,
       },
       {
         headers: {
