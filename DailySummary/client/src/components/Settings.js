@@ -14,12 +14,12 @@ class Settings extends Component {
   };
 
   resetBtnClicked () {
-    axios.post(config.serverUrl + '/password_reset', 
+    axios.post(config.serverUrl + '/api/password_reset', 
     {
-      headers: {token: localStorage.token}
-    }, 
+      params: {user_password: this.state.password},
+    },
     {
-      user_password: this.state.password,
+      headers: {token: localStorage.token},
     }).then(res => {      
       console.log(res.result)
       this.props.history.push("/posts");

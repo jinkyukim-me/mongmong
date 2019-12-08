@@ -30,7 +30,9 @@ class Summary extends Component {
     url += month !== '' ? month + '/' : '';
     url += day == '' ? day + '/' : '';
     console.log(url);
-    axios.get(url)
+    axios.get(url, {
+      headers: {token: localStorage.token},
+    }    )
     .then((response) => {
       console.log(response);
       this.setState({
