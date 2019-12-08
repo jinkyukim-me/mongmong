@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, json
 from flask_mysqldb import MySQL
-from datetime import datetime
+import datetime
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import (JWTManager, jwt_required, jwt_optional, create_access_token, get_jwt_identity, get_jwt_claims)
@@ -15,7 +15,6 @@ from keras.utils.np_utils import to_categorical
 from keras.models import model_from_json
 from krwordrank.sentence import summarize_with_sentences
 from konlpy.tag import Okt
-import datetime
 okt = Okt()
 
 app = Flask(__name__)
@@ -98,7 +97,7 @@ def password_reset():
     user_email = get_jwt_identity()['user_email']
     user_password = request.get_json()['user_password']
     new_password = bcrypt.generate_password_hash(request.get_json()['new_password']).decode('utf-8')
-    created_data_time = datetime.utcnow()
+    created_data_time = datetime.datetime.utcnow()
     cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
     mysql.connection.commit()
     result = {
@@ -113,7 +112,7 @@ def register():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
     user_password = bcrypt.generate_password_hash(request.get_json()['user_password']).decode('utf-8')
-    created_data_time = datetime.utcnow()
+    created_data_time = datetime.datetime.utcnow()
     cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
     mysql.connection.commit()
     result = {'user_email' : user_email,'user_password' : user_password,'created_data_time' : created_data_time}
@@ -128,7 +127,7 @@ def post_input():
     user_email = get_jwt_identity()['user_email']
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
-    created_data_time = datetime.utcnow()
+    created_data_time = datetime.datetime.utcnow()
 
     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
                 str(user_email) + "', '" +
@@ -155,7 +154,7 @@ def post_remove():
     user_email = get_jwt_identity()['user_email']
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
-    removed_data_time = datetime.utcnow()
+    removed_data_time = datetime.datetime.utcnow()
 
     cur.execute("DELETE FROM user_post WHERE user_email = '" + str(user_email) + "' and paragraph = '" + str(paragraph) + "'")
 
@@ -209,7 +208,7 @@ def output():
     user_email = get_jwt_identity()['user_email']
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
-    created_data_time = datetime.utcnow()
+    created_data_time = datetime.datetime.utcnow()
 
     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
     str(user_email) + "', '" +
@@ -235,7 +234,7 @@ def summary():
     user_email = get_jwt_identity()['user_email']
     data = request.get_json()['paragraph']
     emotion = request.get_json()['strength_of_feeling']
-    created_data_time = datetime.utcnow()
+    created_data_time = datetime.datetime.utcnow()
     data_list = []
     for sentence in data:
         list_sentence1 = sentence.split('\n')
