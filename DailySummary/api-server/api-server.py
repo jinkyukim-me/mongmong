@@ -158,7 +158,7 @@ def post_remove():
     removed_data_time = datetime.datetime.utcnow()
 
     cur.execute("DELETE FROM user_post WHERE post_id = '" + str(post_id) + "' and user_email = '" + str(user_email) + "'")
-
+    cur.execute("DELETE FROM user_summary WHERE summary_id = '" + str(post_id) + "' and user_email = '" + str(user_email) + "'")
     mysql.connection.commit()
 
     result = {
@@ -305,4 +305,4 @@ def summary_list():
 
 
 if __name__ == '__main__':
-    app.run(port="5000")
+    app.run(host="0.0.0.0", port="5000")
