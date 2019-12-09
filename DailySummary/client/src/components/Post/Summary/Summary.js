@@ -74,8 +74,8 @@ class Summary extends Component {
   
   renderItem = (item) => {
     return (
-      <List.Item key={item.created_data_time}>
-        <List.Item.Meta title={<a href={"/summary/"+item.created_data_time}>{item.created_data_time}</a>} className="list-item-wrap" />
+      <List.Item key={item.post_id}>
+        <List.Item.Meta title={<a href={"/summary/"+item.post_id}>{item.created_data_time}</a>} className="list-item-wrap" />
         <div>{item.summary_text}</div>
       </List.Item>
     );

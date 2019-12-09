@@ -72,7 +72,7 @@ class Review extends Component {
 
     return (
       <div className="one-selected-review">
-        <div className="one-selected-date-emo-wrapper flex">
+        <div className="one-selected-date-emo-wrapper flex"  key={this.state.data.post_id}>
           <p className="one-selected-date flex"
             // type="date"           
           >
@@ -99,5 +99,4 @@ class Review extends Component {
     )
   }
 }
-export default Review
-          
+export default Review         

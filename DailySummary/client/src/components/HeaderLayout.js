@@ -12,7 +12,7 @@ class HeaderLayout extends Component {
         <Header className="one-header" style={{ background: '#fff', padding: 0 }} >
           <div className="one-logo flex flex-center" >
             <Link to="/">
-              <span>몽 글</span>
+              <span>몽&nbsp;&nbsp;글</span>
             </Link>
           </div>  
         </Header>

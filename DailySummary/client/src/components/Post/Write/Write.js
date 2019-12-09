@@ -48,7 +48,7 @@ class Write extends Component {
         paragraph: "",
         affectivity: "",     
       })
-      this.props.history.push('/posts')       
+      this.props.history.push('/posts/:year/:month')       
     })
     .catch((error) => {
       console.error(error)
@@ -83,7 +83,7 @@ class Write extends Component {
           <LiveClock />
         </div> 
         <TextArea className="one-textarea" 
-          placeholder="...그래서 오늘은 어땠어?"
+          placeholder=""
           value={this.state.paragraph}
           onChange={this.paragraphChanged}  />
         <div className="one-post-btn-container flex">
