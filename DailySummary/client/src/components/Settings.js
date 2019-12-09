@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import { Link, withRouter } from 'react-router-dom';
-import { Form, Input, Select, Button, AutoComplete } from 'antd';
-=======
-import { Link } from 'react-router-dom';
 import { Form, Input,  Button  } from 'antd';
->>>>>>> 6bd6194d077cdbf54631a063d85c8ff526621cbb
 import axios from 'axios';
 
 const config = require('../config');
@@ -16,27 +11,6 @@ class Settings extends Component {
     autoCompleteResult: [],
   };
 
-<<<<<<< HEAD
-  // resetBtnClicked () {
-  //   axios.post(config.serverUrl + '/password_reset', 
-  //   {
-  //     headers: {token: localStorage.token}
-  //   }, 
-  //   {
-  //     user_password: this.state.password,
-  //   }).then(res => {      
-  //     console.log(res.result)
-  //     this.props.history.push("/posts");
-  //   }).catch((error) => {
-  //     if (error.response) {
-  //       alert(error.response.status + ": " + 
-  //             error.response.data.message);
-  //     } else {
-  //       alert(error);
-  //     }
-  //   })
-  // }
-=======
   resetBtnClicked () {
     axios.post(config.serverUrl + '/api/password_reset', 
     {
@@ -56,7 +30,6 @@ class Settings extends Component {
       }
     })
   }
->>>>>>> 6bd6194d077cdbf54631a063d85c8ff526621cbb
 
   handleSubmit = e => {
     e.preventDefault();

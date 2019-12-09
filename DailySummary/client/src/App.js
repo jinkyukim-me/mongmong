@@ -220,11 +220,7 @@ class App extends Component {
                       <Route path="/summary/:year/:month/:day" component={Summary} />
                       <Route path="/summary" component={Summary} />
                       <Route path="/setting" component={Settings} />
-<<<<<<< HEAD
                       <Route path="/register" component={Register} />
-=======
-                      <Route path="/signup" component={SignUp} /> */}
->>>>>>> 6bd6194d077cdbf54631a063d85c8ff526621cbb
                       <Route path="/login" component={NormalLoginForm} />
                       <Route path="/unsubscribe" component={Unsubscribe} />
                       <Route component={NotFound} />
