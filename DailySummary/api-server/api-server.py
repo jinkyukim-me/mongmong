@@ -86,10 +86,11 @@ def login():
     if bcrypt.check_password_hash(rv['user_password'], user_password):
         access_token = create_access_token(identity = {'user_email': rv['user_email']})
         result = jsonify({"token":access_token})
+        return result, 200
     else:
-        result = jsonify({"error":"Invalid username and password"})
 
-    return result
+        result = jsonify({"error":"Invalid username and password"})
+        return result, 401
 
 
 @app.route('/api/password_reset', methods=['POST'])
