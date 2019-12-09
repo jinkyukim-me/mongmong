@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
-import { Form, Input, Select, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Checkbox, Button, } from 'antd';
 import axios from 'axios';
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 const config = require('../../config');
 
 class SignUpForm extends Component {
@@ -21,7 +19,7 @@ class SignUpForm extends Component {
         console.log('Received values of form: ', values);
       }
       
-      axios.post(config.serverUrl + '/register', {
+      axios.post(config.serverUrl + '/api/register', {
         user_email: values.email,
         user_password: values.password,
       })
@@ -70,7 +68,6 @@ class SignUpForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {

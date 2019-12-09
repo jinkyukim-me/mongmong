@@ -1,27 +1,35 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Layout, Form, Icon, Input, Button } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { LoginContext } from '../../contexts/login';
 
 const config = require('../../config');
 
 class NormalLoginForm extends Component {
 
+  state = {    
+    isLogined: localStorage.getItem('token') ? true : false,
+  }
+  
+//   shouldComponentUpdate(nextProps, nextState){
+//     console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
+//     return true;
+// }
+
   login = (email, password) => {
-    // axios.post(config.serverUrl + '/api/auth/token', {
-    axios.post(config.serverUrl + '/login', {
+    axios.post(config.serverUrl + '/api/login', {
       user_email: email,
       user_password: password,
     }).then(res => {
-      // console.log(res.data)
+      console.log(res.data)
+      console.log(this.state.isLogined)
       localStorage.setItem("token", res.data.token);
-      // this.setState({
-      //   setIsLogined : this.setIsLogined
-      // }) 
-      console.log(this.props.setIsLogined)
-      // this.props.setIsLogined(true);
-      this.props.history.push("/post/write");
+      this.setState({
+        isLogined: true
+      })
+      this.props.setIsLogined(true);
+      this.props.history.push("/post/write");   
     }).catch((error) => {
       if (error.response) {
         alert(error.response.status + ": " + 
@@ -39,9 +47,11 @@ class NormalLoginForm extends Component {
       if (!err) {
         const { mail, password } = values
         this.login(mail, password)
-      }
+      }   
     });
   };
+
+  
 
   render() {
   const { getFieldDecorator } = this.props.form
@@ -78,15 +88,15 @@ class NormalLoginForm extends Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
+const WrappedNormalLoginForm = withRouter(Form.create({ name: 'normal_login' })(NormalLoginForm));
 
 const LoginContainer = () => (
-  <LoginContext.Consumer>
-   {
-     ({login}) => 
-     <WrappedNormalLoginForm setIsLogined={login} />
-   }
-  </LoginContext.Consumer>
+    <LoginContext.Consumer>
+    {
+      ({setIsLogined}) => 
+      <WrappedNormalLoginForm setIsLogined={setIsLogined} />
+    }
+    </LoginContext.Consumer>
 );
 
-export default WrappedNormalLoginForm;
+export default withRouter(LoginContainer);

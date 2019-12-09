@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'antd';
-import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const config = require('../../../config');
@@ -22,7 +21,7 @@ class Review extends Component {
 
   handleOk = e => {
     const postId = this.props.match.params.view;
-    axios.delete(config.serverUrl +'/api/posts/' + postId)
+    axios.delete(config.serverUrl +'/api/posts/'+ postId)
     .then((response) => {
       alert("삭제되었습니다!")
       this.setState({
@@ -47,13 +46,25 @@ class Review extends Component {
   }
 
   componentDidMount = () => {
-    const postId = this.props.match.params.view;
-    axios.get(config.serverUrl + '/api/posts/' + postId)
+    axios.post(config.serverUrl + '/api/post_list_day',
+      {
+        post_id: this.props.match.params.view,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      },
+    })    
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
       this.setState({
-        data: response.data,
+        data: response.data.list,
       });
+    })
+    .catch((error) => {
+      console.error(error)
+      alert("에러 발생: " + error.message)
     })
   }
 
@@ -61,14 +72,14 @@ class Review extends Component {
 
     return (
       <div className="one-selected-review">
-        <div className="one-selected-date-emo-wrapper flex">
+        <div className="one-selected-date-emo-wrapper flex"  key={this.state.data.post_id}>
           <p className="one-selected-date flex"
             // type="date"           
           >
-          {this.state.data.createdDt}
+          {this.state.data.created_data_time}
           </p>
           <div className="one-selected-emotion flex" type="input">
-            {this.state.data.affectivity}
+            {this.state.data.strength_of_feeling}
           </div>
         </div>
         <p className="one-selected-textarea"> 
@@ -88,5 +99,4 @@ class Review extends Component {
     )
   }
 }
-export default Review
-          
+export default Review         

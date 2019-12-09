@@ -6,7 +6,7 @@ import { Button } from 'antd';
 
 
 const randomTxt = () => {
-  const texts = ['안녕하세요', '반갑습니다', '오랜만이에요', '어서오세요', '지금 행복하신가요?', '어떻게 지내세요?', '고마워요'];
+  const texts = ['안녕하세요.', '당신의 하루가 궁금해요.', '오늘은 어떤 날이었나요?', '당신의 이야기를 들려주세요.', '오늘은 기분이 어때요?', '어떻게 지내세요?', '뭐든지 들어드릴게요.'];
   const num = Math.floor(Math.random() * 7);
   
   return texts[num];

@@ -25,21 +25,27 @@ class PostsList extends Component {
   }
 
   fetchData = () => {
-    const year = this.props.match.params.year;
-    const month = this.props.match.params.month;
-    //const day = this.props.match.params.day;
-    let url = config.serverUrl +'/api/posts/';
-    url += year !== '' ? year + '/' : '';
-    url += month !== '' ? month + '/' : '';
-    //url += day == '' ? day + '/' : '';
-    
-    console.log(url);
-    axios.get(url)
+    axios.post(config.serverUrl + "/api/post_list", 
+      {
+        yyyy: this.props.match.params.year,
+        mm: this.props.match.params.month,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+        },
+      }
+    )    
     .then((response) => {
-      console.log(response);
+      // console.log(response.data);
       this.setState({
-        data: response.data,
+        data: response.data.list,
       });
+    })
+    .catch((error) => {
+      console.error(error)
+      alert("에러 발생: " + error.message)
     })
   };
 
@@ -64,11 +70,15 @@ class PostsList extends Component {
       });
     });
   };
+
+
   
   renderItem = (item) => {
+    let date = new Date(item.created_data_time)
+    this.date = date.toLocaleString()    
     return (
-      <List.Item key={item.postId}>
-        <List.Item.Meta title={<a href={"/post/"+item.postId}>{item.createdDt}</a>} className="list-item-wrap" />
+      <List.Item key={item.post_id}>
+        <List.Item.Meta title={<a href={"/post/"+item.post_id}>{this.date}</a>} className="list-item-wrap" />
         <div>{item.paragraph}</div>
       </List.Item>
     );

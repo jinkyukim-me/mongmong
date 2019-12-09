@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { Link, withRouter } from 'react-router-dom';
 import { Form, Input, Select, Button, AutoComplete } from 'antd';
+=======
+import { Link } from 'react-router-dom';
+import { Form, Input,  Button  } from 'antd';
+>>>>>>> 6bd6194d077cdbf54631a063d85c8ff526621cbb
 import axios from 'axios';
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 const config = require('../config');
 
 class Settings extends Component {
@@ -13,6 +16,7 @@ class Settings extends Component {
     autoCompleteResult: [],
   };
 
+<<<<<<< HEAD
   // resetBtnClicked () {
   //   axios.post(config.serverUrl + '/password_reset', 
   //   {
@@ -32,6 +36,27 @@ class Settings extends Component {
   //     }
   //   })
   // }
+=======
+  resetBtnClicked () {
+    axios.post(config.serverUrl + '/api/password_reset', 
+    {
+      params: {user_password: this.state.password},
+    },
+    {
+      headers: {token: localStorage.token},
+    }).then(res => {      
+      console.log(res.result)
+      this.props.history.push("/posts");
+    }).catch((error) => {
+      if (error.response) {
+        alert(error.response.status + ": " + 
+              error.response.data.message);
+      } else {
+        alert(error);
+      }
+    })
+  }
+>>>>>>> 6bd6194d077cdbf54631a063d85c8ff526621cbb
 
   handleSubmit = e => {
     e.preventDefault();
@@ -107,7 +132,6 @@ class Settings extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
