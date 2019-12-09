@@ -29,17 +29,36 @@ class Write extends Component {
 
   handleOk = e => { 
     console.log(this.state)
-    axios.post(config.serverUrl + "/api/post_input",
-      {
-        paragraph: this.state.paragraph,
-        strength_of_feeling: this.state.affectivity,
+  //   componentWillMount() {
+
+  //     // Make a request for vehicle data
+   
+  //     axios.all([
+  //       axios.get('/api/seat/models'),
+  //       axios.get('/api/volkswagen/models')
+  //     ])
+  //     .then(axios.spread(function (seat, volkswagen) {
+  //       let vehicles = seat.data.concat(volkswagen.data);
+  //       this.setState({ vehicles: vehicles })
+  //     }))
+  //     //.then(response => this.setState({ vehicles: response.data }))
+  //     .catch(error => console.log(error));
+   
+  //  }
+    axios.all([
+      axios.post(config.serverUrl + "/api/post_input"),
+      axios.post(config.serverUrl + "/api/summary"),
+    ],
+    {
+      paragraph: this.state.paragraph,
+      strength_of_feeling: this.state.affectivity,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`,
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.token}`,
-        },
-      })
+    })      
      .then((response) => {       
       console.log(this.state)  
       // alert("당신의 소중한 하루가 저장되었습니다.")  
@@ -83,7 +102,7 @@ class Write extends Component {
           <LiveClock />
         </div> 
         <TextArea className="one-textarea" 
-          placeholder=""
+          placeholder="마음 가는대로~"
           value={this.state.paragraph}
           onChange={this.paragraphChanged}  />
         <div className="one-post-btn-container flex">
