@@ -29,12 +29,7 @@ class NormalLoginForm extends Component {
         isLogined: true
       })
       this.props.setIsLogined(true);
-      this.props.history.push("/post/write");
-      // this.setState({
-      //   isLogined: this.state
-      //   // setIsLogined : this.setIsLogined
-      // }) 
-
+      this.props.history.push("/post/write");   
     }).catch((error) => {
       if (error.response) {
         alert(error.response.status + ": " + 
