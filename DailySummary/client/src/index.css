@@ -80,6 +80,13 @@ code {
   src: url("./fonts/MaplestoryLight.woff");
 }
 
-.ant-layout * {
+.ant-layout *,
+.ant-modal-title,
+.ant-modal-body,
+.ant-modal-footer,
+.ant-calendar-month-panel-cell,
+.ant-calendar-month-panel-year-select-content,
+.ant-calendar-date-panel * {
   font-family: 'maple-story', sans-serif;
 }
+

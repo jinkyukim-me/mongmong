@@ -42,6 +42,11 @@
   }
 }
 
+// typography
+textarea.ant-input.one-textarea {
+  font: 1rem/1.7 'maple-story', sans-serif;
+}
+
 
 
 
@@ -212,7 +217,7 @@ font-family: 'maple-story', sans-serif;
   height: 100%;
   
   .ant-form-item {
-    width: 400px;
+    width: 450px;
     transform: translateX(-14%);
     
     @include for-mobile {
@@ -425,6 +430,15 @@ font-family: 'maple-story', sans-serif;
 
 .ant-layout-sider-children {
   border-right: 1px solid #e8e8e8;
+}
+
+i.anticon.anticon-right-circle {
+  line-height: 0;
+}
+.ant-btn-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // mobile header
