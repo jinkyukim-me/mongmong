@@ -181,8 +181,8 @@ def post_list():
     mm = request.get_json()['mm']
     cur.execute("SELECT post_id, paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-01 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-31 23:59:59'")
 
-    list =cur.fetchall()
     mysql.connection.commit()
+    list = cur.fetchall()
 
     return jsonify({'list': list})
 
@@ -197,8 +197,8 @@ def post_list_day():
     dd = request.get_json()['dd']
     cur.execute("SELECT post_id, paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
 
-    list = cur.fetchall()
     mysql.connection.commit()
+    list = cur.fetchall()
 
     return jsonify({'list': list})
 
@@ -234,10 +234,12 @@ def output():
 def summary():
     cur = mysql.connection.cursor()
     user_email = get_jwt_identity()['user_email']
-    data = request.get_json()['paragraph']
+    pre_data = request.get_json()['paragraph']
     emotion = request.get_json()['strength_of_feeling']
     created_data_time = datetime.datetime.utcnow()
+    data = []
     data_list = []
+    data.append(pre_data)
     for sentence in data:
         list_sentence1 = sentence.split('\n')
         for list_sentence2 in list_sentence1:
@@ -325,11 +327,11 @@ def summary_list():
     dd = request.get_json()['dd']
     cur.execute("SELECT summary_id, summary_text, created_data_time FROM user_summary WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
 
-    list = cur.fetchall()
     mysql.connection.commit()
+    list = cur.fetchall()
 
     return jsonify({'post': list})
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    app.run()
