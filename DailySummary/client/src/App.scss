@@ -43,37 +43,9 @@
 }
 
 // typography
-// @font-face {
-//   font-family: 'maplestory';
-//   src: url(fonts/MaplestoryBold.ttf) format(truetype);
-//   font-weight: bold;
-// }
-// @font-face {
-//   font-family: 'maplestory';
-//   src: url(fonts/MaplestoryLight.ttf) format(truetype);
-//   font-weight: normal;
-// }
-// @font-face {
-//   font-family: 'maplestory';
-//   src: url(fonts/MaplestoryOTFBold.otf) format(opentype);
-//   font-weight: bold;
-// }
-// @font-face {
-//   font-family: 'maplestory';
-//   src: url(fonts/MaplestoryOTFLight.otf) format(opentype);
-//   font-weight: normal;
-// }
-// @font-face {
-//   font-family: 'maple-story';
-//   src: url(./fonts/MaplestoryBold.ttf) format(truetype),
-//        url(./fonts/MaplestoryLight.ttf) format(truetype),
-//        url(./fonts/MaplestoryOTFBold.otf) format(opentype),
-//        url(./fonts/MaplestoryOTFLight.otf) format(opentype);
-// }
-
-// .ant-layout * {
-//   font-family: 'maple-story', sans-serif;
-// }
+textarea.ant-input.one-textarea {
+  font: 1rem/1.7 'maple-story', sans-serif;
+}
 
 
 
@@ -247,7 +219,7 @@
   height: 100%;
   
   .ant-form-item {
-    width: 400px;
+    width: 450px;
     transform: translateX(-14%);
     
     @include for-mobile {
@@ -460,6 +432,15 @@
 
 .ant-layout-sider-children {
   border-right: 1px solid #e8e8e8;
+}
+
+i.anticon.anticon-right-circle {
+  line-height: 0;
+}
+.ant-btn-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // mobile header
