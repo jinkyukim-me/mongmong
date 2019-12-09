@@ -169,6 +169,20 @@ def post_remove():
     return jsonify({'result': result})
 
 
+@app.route('/api/post', methods=['POST'])
+@jwt_required
+def post_list():
+    cur = mysql.connection.cursor()
+    user_email = get_jwt_identity()['user_email']
+    post_id = request.get_json()['post_id']
+    cur.execute("SELECT post_id, paragraph, strength_of_feeling, created_data_time FROM user_post WHERE post_id ='"+ str(post_id) + "' and user_email ='"+ str(user_email) + "'")
+
+    mysql.connection.commit()
+    list = cur.fetchall()
+
+    return jsonify({'list': list})
+
+
 @app.route('/api/post_list', methods=['POST'])
 @jwt_required
 def post_list():
