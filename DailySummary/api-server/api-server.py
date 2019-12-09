@@ -34,13 +34,13 @@ jwt = JWTManager(app)
 
 CORS(app, resources=r'/api/*')
 
-json_file = open("model_1.json", "r")
+json_file = open("model_2.json", "r")
 loaded_model_json = json_file.read()
 json_file.close()
 
 global model
 model = model_from_json(loaded_model_json)
-model.load_weights("model_1.h5")
+model.load_weights("model_2.h5")
 print("Loaded model from disk")
 global graph
 graph = tf.get_default_graph()
@@ -53,7 +53,7 @@ data.label.value_counts()
 labels = to_categorical(data['label'], num_classes=5)
 stopwords=['의', '가', '이', '은', '들', '는', '좀', '잘', '걍', '과', '도', '를', '으로', '자', '에', '와', '한', '하다',
            ',', '대숲', ',,', '하이', '대학', '안녕', '익명', '글쓴이', '쓰니', '오늘', '나', '너', '저', '누나', '오빠',
-           '기분', '정말', '매우', '몹시', '너무', '엄청', '아주', '훨씬', '가장', '최고', '더', '덜', '맣이', '조금']
+           '기분', '정말', '매우', '몹시', '너무', '엄청', '아주', '훨씬', '가장', '최고', '더', '덜', '많이', '조금']
 X_train=[]
 
 max_len=30
@@ -179,7 +179,7 @@ def post_list():
     user_email = get_jwt_identity()['user_email']
     yyyy = request.get_json()['yyyy']
     mm = request.get_json()['mm']
-    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-01 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-31 23:59:59'")
+    cur.execute("SELECT post_id, paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-01 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-31 23:59:59'")
 
     list =cur.fetchall()
     mysql.connection.commit()
@@ -195,7 +195,7 @@ def post_list_day():
     yyyy = request.get_json()['yyyy']
     mm = request.get_json()['mm']
     dd = request.get_json()['dd']
-    cur.execute("SELECT paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
+    cur.execute("SELECT post_id, paragraph, strength_of_feeling, created_data_time FROM user_post WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
 
     list = cur.fetchall()
     mysql.connection.commit()
@@ -323,7 +323,7 @@ def summary_list():
     yyyy = request.get_json()['yyyy']
     mm = request.get_json()['mm']
     dd = request.get_json()['dd']
-    cur.execute("SELECT summary_text, created_data_time FROM user_summary WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
+    cur.execute("SELECT summary_id, summary_text, created_data_time FROM user_summary WHERE user_email ='"+ str(user_email) + "' and created_data_time between '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 00:00:00' and '" + str(yyyy) + "-" + str(mm) + "-" + str(dd) +" 23:59:59'")
 
     list = cur.fetchall()
     mysql.connection.commit()
