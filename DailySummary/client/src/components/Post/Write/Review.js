@@ -20,8 +20,18 @@ class Review extends Component {
   };
 
   handleOk = e => {
-    const postId = this.props.match.params.view;
-    axios.delete(config.serverUrl +'/api/posts/'+ postId)
+    let postId = this.props.match.params.view;
+    axios.delete(config.serverUrl +'/api/post_remove',
+      {
+        post_id: postId,
+        // post_id: this.props.match.params.view,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      },
+    })    
     .then((response) => {
       alert("삭제되었습니다!")
       this.setState({
@@ -41,9 +51,6 @@ class Review extends Component {
     });
   };
 
-  onChange(event) {
-    
-  }
 
   componentDidMount = () => {
     axios.post(config.serverUrl + '/api/post_list_day',

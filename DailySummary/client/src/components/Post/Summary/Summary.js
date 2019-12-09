@@ -76,7 +76,7 @@ class Summary extends Component {
     return (
       <List.Item key={item.post_id}>
         <List.Item.Meta title={<a href={"/summary/"+item.post_id}>{item.created_data_time}</a>} className="list-item-wrap" />
-        <div>{item.summary_text}</div>
+        <textarea className="ant-input one-textarea">{item.summary_text}</textarea>
       </List.Item>
     );
   }
