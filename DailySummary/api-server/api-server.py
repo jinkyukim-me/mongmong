@@ -171,7 +171,7 @@ def post_remove():
 
 @app.route('/api/post', methods=['POST'])
 @jwt_required
-def post_list():
+def post():
     cur = mysql.connection.cursor()
     user_email = get_jwt_identity()['user_email']
     post_id = request.get_json()['post_id']
