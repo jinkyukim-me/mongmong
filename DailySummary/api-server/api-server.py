@@ -154,18 +154,15 @@ def post_input():
 def post_remove():
     cur = mysql.connection.cursor()
     user_email = get_jwt_identity()['user_email']
-    paragraph = request.get_json()['paragraph']
-    strength_of_feeling = request.get_json()['strength_of_feeling']
+    post_id = request.get_json()['post_id']
     removed_data_time = datetime.datetime.utcnow()
 
-    cur.execute("DELETE FROM user_post WHERE user_email = '" + str(user_email) + "' and paragraph = '" + str(paragraph) + "'")
+    cur.execute("DELETE FROM user_post WHERE post_id = '" + str(post_id) + "' and user_email = '" + str(user_email) + "'")
 
     mysql.connection.commit()
 
     result = {
         'user_email': user_email,
-        'paragraph': paragraph,
-        'strength_of_feeling': strength_of_feeling,
         'removed_data_time': removed_data_time
     }
 
@@ -201,32 +198,6 @@ def post_list_day():
     list = cur.fetchall()
 
     return jsonify({'list': list})
-
-
-@app.route('/api/summary_input', methods=['POST'])
-@jwt_required
-def output():
-    cur = mysql.connection.cursor()
-    user_email = get_jwt_identity()['user_email']
-    paragraph = request.get_json()['paragraph']
-    strength_of_feeling = request.get_json()['strength_of_feeling']
-    created_data_time = datetime.datetime.utcnow()
-
-    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
-    str(user_email) + "', '" +
-    str(paragraph) + "', '" +
-    str(strength_of_feeling) + "', '" +
-    str(created_data_time) + "')")
-
-    mysql.connection.commit()
-    result = {
-            'user_email' : user_email,
-            'paragraph' : paragraph,
-            'strength_of_feeling' : strength_of_feeling,
-            'created_data_time' : created_data_time
-        }
-
-    return jsonify({'result' : result})
 
 
 @app.route('/api/summary', methods=['POST'])
@@ -334,4 +305,4 @@ def summary_list():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port="5000")
+    app.run(port="5000")
