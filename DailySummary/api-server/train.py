@@ -43,29 +43,7 @@ print(model.summary())
 history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,validation_split=0.2,callbacks=[EarlyStopping(monitor='val_loss',patience=7, min_delta=0.0001)])
 
 model_json = model.to_json()
-with open("model_1.json", "w") as json_file :
+with open("model_2.json", "w") as json_file :
     json_file.write(model_json)
-model.save_weights("model_1.h5")
+model.save_weights("model_2.h5")
 print("Saved model to disk")
-import matplotlib.pyplot as plt
-
-acc = history.history['acc']
-val_acc = history.history['val_acc']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs = range(1, len(acc) + 1)
-
-plt.plot(epochs, acc, 'bo', label='Training acc')
-plt.plot(epochs, val_acc, 'b', label='Validation acc')
-plt.title('Training and validation accuracy')
-plt.legend()
-
-plt.figure()
-
-plt.plot(epochs, loss, 'bo', label='Training loss')
-plt.plot(epochs, val_loss, 'b', label='Validation loss')
-plt.title('Training and validation loss')
-plt.legend()
-
-plt.show()

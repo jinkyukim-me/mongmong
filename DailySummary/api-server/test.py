@@ -10,13 +10,13 @@ from konlpy.tag import Okt
 okt = Okt()
 
 from keras.models import model_from_json
-json_file = open("model_1.json", "r")
+json_file = open("model_2.json", "r")
 loaded_model_json = json_file.read()
 json_file.close()
 
 global model
 model = model_from_json(loaded_model_json)
-model.load_weights("model_1.h5")
+model.load_weights("model_2.h5")
 print("Loaded model from disk")
 global graph
 graph = tf.get_default_graph()
@@ -29,7 +29,7 @@ data.label.value_counts()
 labels = to_categorical(data['label'], num_classes=5)
 stopwords=['의', '가', '이', '은', '들', '는', '좀', '잘', '걍', '과', '도', '를', '으로', '자', '에', '와', '한', '하다',
            ',', '대숲', ',,', '하이', '대학', '안녕', '익명', '글쓴이', '쓰니', '오늘', '나', '너', '저', '누나', '오빠',
-           '기분', '정말', '매우', '몹시', '너무', '엄청', '아주', '훨씬', '가장', '최고', '더', '덜', '맣이', '조금']
+           '기분', '정말', '매우', '몹시', '너무', '엄청', '아주', '훨씬', '가장', '최고', '더', '덜', '많이', '조금']
 X_train=[]
 
 max_len=30
