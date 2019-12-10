@@ -297,6 +297,16 @@ textarea.ant-input.one-textarea {
   .ant-list-item-meta-description {
     margin-right: 1em;
   }
+  
+  &.one-summary {
+    .ant-list-item {
+      div:nth-child(2) {
+        overflow: auto;
+        white-space: normal;
+        text-overflow: clip;
+      }
+    }
+  }
 }
 .one-content-notfound {
   height: 100%;
@@ -473,10 +483,9 @@ ul.ant-list-items {
 i.anticon.anticon-calendar {
   margin-right: 0;
 }
-.one-selected-review {
-  .one-selected-date-emo-wrapper {
-    
-  }
+
+.one-post-btn-container .one-contents-emotion .emotion-describe {
+  font-size: 0.9rem;
 }
 
 // icon font

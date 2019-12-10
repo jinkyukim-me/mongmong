@@ -86,7 +86,7 @@ class Summary extends Component {
 
   render() {
     return (
-      <div className="demo-infinite-container one-list">
+      <div className="demo-infinite-container one-list one-summary">
         <InfiniteScroll initialLoad={false} pageStart={0} loadMore={this.handleInfiniteOnLoad} hasMore={!this.state.loading && this.state.hasMore} useWindow={false} >
           <List dataSource={this.state.data} renderItem={this.renderItem} >
             {this.state.loading && this.state.hasMore && (
