@@ -107,7 +107,7 @@ class Write extends Component {
         <div className="one-post-btn-container flex">
           <Emotion clickHandler={this.selectedEmotion}/>
           <Button type="primary" onClick={this.showModal} className="btn btn-submit">저장</Button>
-          <Modal title="글이 완성되었습니다." visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} >
+          <Modal visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} cancelText= '아니요' okText='예'>
 {/*  리뷰 페이지로 이동 */}
               저장하시겠습니까?
           </Modal>       
