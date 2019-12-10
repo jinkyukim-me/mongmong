@@ -118,7 +118,7 @@ def register():
     user_confirm_password = bcrypt.generate_password_hash(request.get_json()['user_confirm_password']).decode('utf-8')
     check = request.get_json()['check']
     created_data_time = datetime.datetime.utcnow()
-    if user_password == user_confirm_password and check == True:
+    if user_password == user_confirm_password and check == "true":
         cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
         mysql.connection.commit()
         result = {'user_email' : user_email,'user_password' : user_password,'created_data_time' : created_data_time}
