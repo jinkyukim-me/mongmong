@@ -119,7 +119,7 @@ def register():
     user_confirm_password = request.get_json()['user_confirm_password']
     check = request.get_json()['check']
     created_data_time = datetime.datetime.utcnow()
-    if user_password == user_confirm_password and check == True:
+    if len(user_email) > 5 and user_password == user_confirm_password and check == True:
         user_password = bcrypt.generate_password_hash(user_password).decode('utf-8')
         cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
         mysql.connection.commit()
@@ -327,4 +327,4 @@ def summary_list():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="5000")
+    app.run(port="5000")
