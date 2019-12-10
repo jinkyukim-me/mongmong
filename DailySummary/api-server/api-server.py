@@ -98,29 +98,56 @@ def login():
 def password_reset():
     cur = mysql.connection.cursor()
     user_email = get_jwt_identity()['user_email']
-    user_password = request.get_json()['user_password']
-    new_password = bcrypt.generate_password_hash(request.get_json()['new_password']).decode('utf-8')
-    created_data_time = datetime.datetime.utcnow()
-    cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
-    mysql.connection.commit()
-    result = {
-        'user_password' : user_password,
-        'new_password' : new_password
-    }
-    return result
+    new_password = request.get_json()['new_password']
+    new_confirm_password = request.get_json()['new_confirm_password']
+    if new_password == new_confirm_password:
+        new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+        cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
+        mysql.connection.commit()
+        result = jsonify({
+            "new_password": new_password
+        })
+        return result, 200
+    else:
+        result = jsonify({
+            "error": "error"
+        })
+        return result, 401
 
 
 @app.route('/api/register', methods=['POST'])
 def register():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
-    user_password = bcrypt.generate_password_hash(request.get_json()['user_password']).decode('utf-8')
+    user_password = request.get_json()['user_password']
+    user_confirm_password = request.get_json()['user_confirm_password']
+    check = request.get_json()['check']
     created_data_time = datetime.datetime.utcnow()
-    cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
-    mysql.connection.commit()
-    result = {'user_email' : user_email,'user_password' : user_password,'created_data_time' : created_data_time}
+    if len(user_email) > 5 and user_password == user_confirm_password and check == True:
+        user_password = bcrypt.generate_password_hash(user_password).decode('utf-8')
+        cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
+        mysql.connection.commit()
+        result = jsonify({"user_email" : user_email, "user_password" : user_password, "created_data_time" : created_data_time})
+        return result, 200
+    else:
+        result = jsonify({"error": "error"})
+        return result, 401
 
-    return jsonify({'result' : result})
+
+@app.route('/api/register_remove', methods=['GET'])
+@jwt_required
+def register_remove():
+    cur = mysql.connection.cursor()
+    user_email = get_jwt_identity()['user_email']
+
+    cur.execute("DELETE FROM user_info WHERE user_email = '" + str(user_email) + "'")
+    mysql.connection.commit()
+
+    result = jsonify({
+        'user_email': "remove"
+    })
+
+    return result
 
 
 @app.route('/api/post_input', methods=['POST'])
