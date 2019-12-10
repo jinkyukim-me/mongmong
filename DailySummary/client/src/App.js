@@ -182,6 +182,8 @@ class App extends Component {
                       visible={this.state.visible}
                       onOk={this.handleLogout}
                       onCancel={this.handleCancel}
+                      cancelText= '아니요' 
+                      okText='예'
                     >
                       로그아웃 하시겠습니까?
                     </Modal>   {/* 로그아웃 클릭시 로그인 버튼으로 전환 및 연동 부분 추가 */}
