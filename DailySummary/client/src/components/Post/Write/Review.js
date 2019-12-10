@@ -97,13 +97,13 @@ class Review extends Component {
             {this.state.data.strength_of_feeling}
           </div>
         </div>
-        <p className="one-selected-textarea"> 
-          {this.state.data.paragraph}
-        </p>
+        <textarea className="one-selected-textarea" value={this.state.data.paragraph} readOnly>
+          {/* {this.state.data.paragraph} */}
+        </textarea>
       
         <div className="one-selected-btnContainer flex">
           <Button type="dashed" onClick={this.showModal} onChange={this.onChange} className="btn btn-delete">삭제</Button>
-            <Modal title="Basic Modal" visible={this.state.visible} okType= 'danger' onOk={this.rmhandleOk} onCancel={this.rmhandleCancel} >
+            <Modal visible={this.state.visible} okType= 'danger' onOk={this.rmhandleOk} onCancel={this.rmhandleCancel} cancelText= '아니요' okText='예'>
               <p>정말 삭제하시겠습니까?</p>
             </Modal>
           <Button type="primary" className="btn btn-submit" onClick={this.btnToList} >

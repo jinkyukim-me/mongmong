@@ -22,6 +22,8 @@ class SignUpForm extends Component {
       axios.post(config.serverUrl + '/api/register', {
         user_email: values.email,
         user_password: values.password,
+        user_confirm_password: values.confirm,
+        check: values.agreement,
       })
       .then((response) => {
         alert(`${response.user_email} 님의 회원가입이 완료되었습니다.`);

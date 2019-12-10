@@ -177,8 +177,8 @@ class App extends Component {
                     <span className="nav-text">
                       로그아웃
                     </span>
-                    <Modal
-                      title="Basic Modal"
+                    <Modal                      
+                      title=""
                       visible={this.state.visible}
                       onOk={this.handleLogout}
                       onCancel={this.handleCancel}
