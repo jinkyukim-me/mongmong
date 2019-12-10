@@ -232,7 +232,7 @@ textarea.ant-input.one-textarea {
   height: 100%;
   
   .ant-form-item {
-    width: 400px;
+    width: 450px;
     transform: translateX(-14%);
     
     @include for-mobile {
@@ -303,46 +303,73 @@ textarea.ant-input.one-textarea {
   text-align: center;
 }
 .one-selected-review , .one-selected-summary{
-  height: 100%;
-  padding: 9% 7%;
+  position: relative;
+  height: 46vh;
+  margin: 9% 7%;
+  border: 3px solid #555;
+  border-radius: 10px;
   clear: both;
+  
+  @include for-mobile {
+    height: 60vh;
+  }
+  
   .one-selected-date-emo-wrapper {
     flex-direction: row;
+    margin-top: 1em;
     margin-bottom: 1%;
     .one-selected-date {
+      align-items: center;
+      flex: auto;
       width: 50%; 
       height: 5vh;
-      display: inline-block;
+      // display: inline-block;
       padding: 0.5rem;
+      padding-left: 1rem;
       margin-left: left 1%;
       background: #e8f8f1;
       border-radius: 20px;
       font-family: 'Song Myung', serif;
       font-size: 1.2rem;
+      background-color: #fff;
     } 
     .one-selected-emotion {
-      display: inline-block;
+      // display: inline-block;
+      justify-content: center;
+      align-items: center;
       border: 1em;
       width: 5vh;
       height: 5vh;
       border-radius: 50px;
-      background: rgb(210, 224, 236);
-    }   
+      // background: rgb(210, 224, 236);
+    }
   }
   .one-selected-textarea {
-    height: 80%;
+    width: 100%;
+    border: 0;
+    height: 67%;
+    // height: 80%;
     margin-bottom: 1.5em;
-    padding: 2rem;
-    border-radius: 20px;
-    border-color: rgb(243, 200, 200);
-    background-color: rgb(243, 245, 243);
+    padding: 1rem;
+    // border-radius: 20px;
+    // border-color: rgb(243, 200, 200);
+    // background-color: rgb(243, 245, 243);
     font-family: 'Song Myung', serif;
     font-size: 1.1rem;
+    
+    @include for-mobile {
+      height: 84%;
+    }
   }
   
   .one-selected-btnContainer {
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: -60px;
+    left: 0;
     justify-content: space-between;
-    top: 1em;
+    // top: 1em;
   }
 }
 .one-selected-summary {
@@ -405,9 +432,21 @@ i.anticon.anticon-right-circle {
   justify-content: center;
   align-items: center;
 }
-.ant-list-items {
+ul.ant-list-items {
+  // display: flex;
+  // flex-direction: column-reverse;
   overflow-y: scroll;
   height: 70vh;
+  
+  // & > .ant-list-item {
+  //   &:first-child {
+  //     border-bottom-width: 0;
+  //   }
+    
+  //   &:last-child {
+  //     border-bottom: 1px solid #e8e8e8;
+  //   }
+  // }
 }
 .ant-list-item-meta.list-item-wrap {
   flex: none;
@@ -432,6 +471,13 @@ i.anticon.anticon-right-circle {
 i.anticon.anticon-calendar {
   margin-right: 0;
 }
+
+.one-selected-review {
+  .one-selected-date-emo-wrapper {
+    
+  }
+}
+
 // mobile header
 .ant-layout-sider-zero-width-trigger {
   @include for-mobile {
