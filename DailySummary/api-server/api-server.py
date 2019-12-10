@@ -105,12 +105,12 @@ def password_reset():
         cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
         mysql.connection.commit()
         result = jsonify({
-            'new_password' : new_password
+            "new_password": new_password
         })
         return result, 200
     else:
         result = jsonify({
-            'error' : 'error'
+            "error": "error"
         })
         return result, 401
 
@@ -130,7 +130,7 @@ def register():
         result = jsonify({"user_email" : user_email, "user_password" : user_password, "created_data_time" : created_data_time})
         return result, 200
     else:
-        result = jsonify({"error":"error"})
+        result = jsonify({"error": "error"})
         return result, 401
 
 
