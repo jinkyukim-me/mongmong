@@ -86,10 +86,11 @@ def login():
     if bcrypt.check_password_hash(rv['user_password'], user_password):
         access_token = create_access_token(identity = {'user_email': rv['user_email']})
         result = jsonify({"token":access_token})
+        return result, 200
     else:
-        result = jsonify({"error":"Invalid username and password"})
 
-    return result
+        result = jsonify({"error":"Invalid username and password"})
+        return result, 401
 
 
 @app.route('/api/password_reset', methods=['POST'])
@@ -167,6 +168,20 @@ def post_remove():
     }
 
     return jsonify({'result': result})
+
+
+@app.route('/api/post', methods=['POST'])
+@jwt_required
+def post():
+    cur = mysql.connection.cursor()
+    user_email = get_jwt_identity()['user_email']
+    post_id = request.get_json()['post_id']
+    cur.execute("SELECT post_id, paragraph, strength_of_feeling, created_data_time FROM user_post WHERE post_id ='"+ str(post_id) + "' and user_email ='"+ str(user_email) + "'")
+
+    mysql.connection.commit()
+    list = cur.fetchall()
+
+    return jsonify({'list': list})
 
 
 @app.route('/api/post_list', methods=['POST'])

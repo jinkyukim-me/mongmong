@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'antd';
 import axios from 'axios';
+import Emotion from './Emotion';
 
 const config = require('../../../config');
 
@@ -16,14 +17,24 @@ class Review extends Component {
   showModal = () => {
     this.setState({
       visible: true,
-    });
+    });    
   };
 
-  handleOk = e => {
-    const postId = this.props.match.params.view;
-    axios.delete(config.serverUrl +'/api/posts/'+ postId)
+  rmhandleOk = e => {
+    let postId = this.props.match.params.view;
+    axios.post(config.serverUrl +'/api/post_remove',
+      {
+        post_id: postId,
+        // post_id: this.props.match.params.view,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      },
+    })    
     .then((response) => {
-      alert("삭제되었습니다!")
+      // alert("삭제되었습니다!")
       this.setState({
         visible: false,
       });
@@ -34,19 +45,21 @@ class Review extends Component {
     })
   }
 
-  handleCancel = e => {
+  rmhandleCancel = e => {
     console.log(e);
     this.setState({
       visible: false,
     });
   };
 
-  onChange(event) {
-    
+  btnToList = e => {
+    console.log(e)
+    this.props.history.goBack()
   }
 
+
   componentDidMount = () => {
-    axios.post(config.serverUrl + '/api/post_list_day',
+    axios.post(config.serverUrl + '/api/post',
       {
         post_id: this.props.match.params.view,
       },
@@ -59,7 +72,7 @@ class Review extends Component {
     .then((response) => {
       console.log(response.data);
       this.setState({
-        data: response.data.list,
+        data: response.data.list[0],
       });
     })
     .catch((error) => {
@@ -68,15 +81,17 @@ class Review extends Component {
     })
   }
 
-  render() {
-
+  render() { 
+    let date = new Date()
+    this.date = date.toLocaleString()
+    
     return (
       <div className="one-selected-review">
         <div className="one-selected-date-emo-wrapper flex"  key={this.state.data.post_id}>
           <p className="one-selected-date flex"
             // type="date"           
           >
-          {this.state.data.created_data_time}
+          {this.date}
           </p>
           <div className="one-selected-emotion flex" type="input">
             {this.state.data.strength_of_feeling}
@@ -88,10 +103,10 @@ class Review extends Component {
       
         <div className="one-selected-btnContainer flex">
           <Button type="dashed" onClick={this.showModal} onChange={this.onChange} className="btn btn-delete">삭제</Button>
-            <Modal title="Basic Modal" visible={this.state.visible} okType= 'danger' onOk={this.handleOk} onCancel={this.handleCancel} >
+            <Modal title="Basic Modal" visible={this.state.visible} okType= 'danger' onOk={this.rmhandleOk} onCancel={this.rmhandleCancel} >
               <p>정말 삭제하시겠습니까?</p>
             </Modal>
-          <Button type="primary" className="btn btn-submit" >
+          <Button type="primary" className="btn btn-submit" onClick={this.btnToList} >
             목록으로
           </Button>           
         </div>
