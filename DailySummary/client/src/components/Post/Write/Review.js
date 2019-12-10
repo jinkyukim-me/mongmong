@@ -97,9 +97,9 @@ class Review extends Component {
             {this.state.data.strength_of_feeling}
           </div>
         </div>
-        <p className="one-selected-textarea"> 
-          {this.state.data.paragraph}
-        </p>
+        <textarea className="one-selected-textarea" value={this.state.data.paragraph}> 
+          {/* {this.state.data.paragraph} */}
+        </textarea>
       
         <div className="one-selected-btnContainer flex">
           <Button type="dashed" onClick={this.showModal} onChange={this.onChange} className="btn btn-delete">삭제</Button>

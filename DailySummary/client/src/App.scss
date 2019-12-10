@@ -433,23 +433,25 @@ i.anticon.anticon-right-circle {
   align-items: center;
 }
 ul.ant-list-items {
-  // display: flex;
-  // flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
   overflow-y: scroll;
-  height: 70vh;
+  // height: 70vh;
   
-  // & > .ant-list-item {
-  //   &:first-child {
-  //     border-bottom-width: 0;
-  //   }
+  & > .ant-list-item {
+    &:first-child {
+      border-bottom-width: 0;
+    }
     
-  //   &:last-child {
-  //     border-bottom: 1px solid #e8e8e8;
-  //   }
-  // }
+    &:last-child {
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
 }
 .ant-list-item-meta.list-item-wrap {
   flex: none;
+  width: 180px;
+  // cursor: pointer;
   
   .ant-list-item-meta-title {
     margin-bottom: 0;

@@ -96,5 +96,5 @@ code {
 textarea {
 	font-family:'Nanum Barun Gothic' !important;
 	line-height: 1.8;
-	resize: none;
+	resize: none !important;
 }
