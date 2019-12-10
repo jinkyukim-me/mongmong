@@ -121,10 +121,11 @@ def register():
     if user_password == user_confirm_password and check == "true":
         cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
         mysql.connection.commit()
-        result = {'user_email' : user_email,'user_password' : user_password,'created_data_time' : created_data_time}
-        return jsonify({'result' : result}), 200
+        result = {"user_email" : user_email, "user_password" : user_password, "created_data_time" : created_data_time}
+        return result, 200
     else:
-        return 401
+        result = {"error":"error"}
+        return result, 401
 
 
 @app.route('/api/post_input', methods=['POST'])
