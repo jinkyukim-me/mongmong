@@ -48,7 +48,7 @@ class Settings extends Component {
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback('두 비밀번호가 일치하지 않습니다.');
     } else {
       callback();
     }
@@ -100,7 +100,7 @@ class Settings extends Component {
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit} className="one-settings flex flex-center">
-        <Form.Item label="Password" className="one-input-pw" hasFeedback>
+        <Form.Item label="비밀번호" className="one-input-pw" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
               {
@@ -113,7 +113,7 @@ class Settings extends Component {
             ],
           })(<Input.Password />)}
         </Form.Item>
-        <Form.Item label="Confirm Password" className="one-input-confirm-pw" hasFeedback>
+        <Form.Item label="비밀번호 변경" className="one-input-confirm-pw" hasFeedback>
           {getFieldDecorator('confirm', {
             rules: [
               {

@@ -70,8 +70,6 @@ class PostsList extends Component {
       });
     });
   };
-
-
   
   renderItem = (item) => {
     let date = new Date(item.created_data_time)
