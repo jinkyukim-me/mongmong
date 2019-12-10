@@ -100,14 +100,18 @@ class Write extends Component {
         <div className="one-liveClock-container">
           <LiveClock />
         </div> 
-        <TextArea className="one-textarea" 
-          placeholder={randomTxt()}
-          value={this.state.paragraph}
-          onChange={this.paragraphChanged}  />
+          <TextArea className="one-textarea" 
+            placeholder={randomTxt()}
+            value={this.state.paragraph}
+            onChange={this.paragraphChanged}  />
         <div className="one-post-btn-container flex">
           <Emotion clickHandler={this.selectedEmotion}/>
           <Button type="primary" onClick={this.showModal} className="btn btn-submit">저장</Button>
+<<<<<<< HEAD
           <Modal visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} cancelText= '아니요' okText='예'>
+=======
+          <Modal visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel} okText="예" cancelText="아니요">
+>>>>>>> clientcho
 {/*  리뷰 페이지로 이동 */}
               저장하시겠습니까?
           </Modal>       

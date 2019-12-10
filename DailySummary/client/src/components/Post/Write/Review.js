@@ -102,7 +102,7 @@ class Review extends Component {
         </textarea>      
         <div className="one-selected-btnContainer flex">
           <Button type="dashed" onClick={this.showModal} onChange={this.onChange} className="btn btn-delete">삭제</Button>
-            <Modal visible={this.state.visible} okType= 'danger' onOk={this.rmhandleOk} onCancel={this.rmhandleCancel} cancelText= '아니오' okText='예'>
+            <Modal visible={this.state.visible} okType='danger' onOk={this.rmhandleOk} onCancel={this.rmhandleCancel} okText="예" cancelText="아니요">
               <p>정말 삭제하시겠습니까?</p>
             </Modal>
           <Button type="primary" className="btn btn-submit" onClick={this.btnToList} >
