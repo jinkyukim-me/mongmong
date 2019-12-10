@@ -86,7 +86,8 @@ code {
 .ant-modal-footer,
 .ant-calendar-month-panel-cell,
 .ant-calendar-month-panel-year-select-content,
-.ant-calendar-date-panel * {
+.ant-calendar-date-panel *,
+.one-header .one-logo a {
   font-family: 'maple-story', sans-serif;
-}
+} 
 
