@@ -478,6 +478,21 @@ i.anticon.anticon-calendar {
     
   }
 }
+
+// icon font
+.iconList {
+  display: flex;
+  
+  .ant-btn {
+    display: flex;
+    align-self: center;
+  }
+  
+  .icon {
+    font-size: 1.3em;
+  }
+}
+
 // mobile header
 .ant-layout-sider-zero-width-trigger {
   @include for-mobile {

@@ -1,26 +1,33 @@
 import React, { Component } from 'react'
 import { Button, Icon } from 'antd'
+import { faTired, faFrownOpen, faMeh, faSmile, faLaughSquint } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Emotion extends Component {
   render() {
     return(
       <div className="one-contents-emotion">
         <p className="emotion-describe">오늘 기분은??</p>
-        <div className='iconList' style={{ padding: 5, background: '#fff', minHeight: 20}}>
+        <div className='iconList'>
           <Button value="4" onClick={this.props.clickHandler}>
-            <Icon type="like" />
+            {/* <Icon type="like" /> */}
+            <FontAwesomeIcon icon={faTired} className="icon" />
           </Button>
           <Button value="3" onClick={this.props.clickHandler}>
-            <Icon type="smile" />
+            {/* <Icon type="smile" /> */}
+            <FontAwesomeIcon icon={faFrownOpen} className="icon" />
           </Button>         
           <Button value="2" onClick={this.props.clickHandler}>
-           <Icon type="meh" />
+           {/* <Icon type="meh" /> */}
+           <FontAwesomeIcon icon={faMeh} className="icon" />
           </Button>
           <Button value="1" onClick={this.props.clickHandler}>
-            <Icon type="frown" />
+            {/* <Icon type="frown" /> */}
+            <FontAwesomeIcon icon={faSmile} className="icon" />
           </Button>         
           <Button value="0" onClick={this.props.clickHandler}>
-            <Icon type="dislike" />
+            {/* <Icon type="dislike" /> */}
+            <FontAwesomeIcon icon={faLaughSquint} className="icon" />
           </Button>        
         </div>
       </div>
