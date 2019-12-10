@@ -9,56 +9,42 @@
   justify-content: center;
   align-items: center;
 }
-
 // position
 .position-center {
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .position-vertical-center {
-	top: 50%;
-	transform: translateY(-50%);
+    top: 50%;
+    transform: translateY(-50%);
 }
 .position-horizontal-center {
-	left: 50%;
-	transform: translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
 }
 .position-full-page {
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
-
 .line-break {
-	display: block;
+    display: block;
 }
-
 // mixin
 @mixin for-mobile {
   @media screen and (max-width: 990px) {
     @content;
   }
 }
-
 // typography
 textarea.ant-input.one-textarea {
   font: 1rem/1.7 'maple-story', sans-serif;
 }
-
-
-
-
-
-
-
-
-
 // =================================================================================
 // contents
 //
-
 .one-sidebar {
   height: 100vh;
   font-family: 'Single Day', cursive;
@@ -69,17 +55,14 @@ textarea.ant-input.one-textarea {
     z-index: 20;
   }
 }
-
 .one-nav {
-  height: 100%;
+  // height: 100%;
   border: 0;
 }
-
 .one-main {
   height: 100vh;
   background-color: #fff;
 }
-
 @import url('https://fonts.googleapis.com/css?family=Song+Myung&display=swap');
 .one-menu-logo {
   @media screen and (max-width:990px) {  
@@ -92,7 +75,6 @@ textarea.ant-input.one-textarea {
     font-family: 'Single Day', cursive;
     }
   }
-
 .one-logo {  
   font-size: 3rem;        
   span {
@@ -102,20 +84,17 @@ textarea.ant-input.one-textarea {
     font-family: 'Single Day', cursive;
     }
   } 
-
 @media screen and (min-width:990px) {  
   .one-header {
   background-color: #f0f2f5;
   display: none;      
   } 
 };
-
 @media screen and (max-width:990px) {  
   .one-header {
     display: block;
     } 
 };
-
 .one-welcome {
   overflow: hidden;
   position: relative;
@@ -150,7 +129,6 @@ textarea.ant-input.one-textarea {
     font-size: 1.6rem;
   }
 }
-
 .one-login {
   height: 100%;
   background-color: #fff;
@@ -167,7 +145,6 @@ textarea.ant-input.one-textarea {
     margin-bottom: 0.75em;
   }
 }
-
 // emotion
 .one-contents-emotion {
   .emotion-describe {
@@ -180,7 +157,6 @@ textarea.ant-input.one-textarea {
     margin-top: 2em;
   }
 }
-
 .one-post-write {
   height: 100%;
   padding: 9% 7%;
@@ -200,7 +176,6 @@ textarea.ant-input.one-textarea {
     font-family: 'Song Myung', serif;
     font-size: 1.3rem;
   }
-
   .one-post-btn-container {
     justify-content: space-between;
     align-items: flex-end;
@@ -213,7 +188,6 @@ textarea.ant-input.one-textarea {
     padding: 5px 0 0;
   }
 }
-
 .one-settings {
   flex-direction: column;
   height: 100%;
@@ -253,8 +227,6 @@ textarea.ant-input.one-textarea {
     }
   }
 }
-
-
 .one-signup {
   flex-direction: column;
   height: 100%;
@@ -283,7 +255,6 @@ textarea.ant-input.one-textarea {
     margin-right: 1.5em;
   }
 }
-
 .one-unsubscribe {
   flex-direction: column;
   height: 100%;
@@ -305,12 +276,15 @@ textarea.ant-input.one-textarea {
     margin-right: 0.8em;
   }
 }
-
 .one-list {
   position: relative;
   top: 50%;
   margin: 0 5%;
   transform: translateY(-50%);
+  
+  @include for-mobile {
+    margin: 0 8%;
+  }
   
   .ant-list-item-meta-content {
     display: flex;
@@ -324,22 +298,17 @@ textarea.ant-input.one-textarea {
     margin-right: 1em;
   }
 }
-
-
 .one-content-notfound {
   height: 100%;
   text-align: center;
 }
-
 .one-selected-review , .one-selected-summary{
   height: 100%;
   padding: 9% 7%;
   clear: both;
-
   .one-selected-date-emo-wrapper {
     flex-direction: row;
     margin-bottom: 1%;
-
     .one-selected-date {
       width: 50%; 
       height: 5vh;
@@ -360,7 +329,6 @@ textarea.ant-input.one-textarea {
       background: rgb(210, 224, 236);
     }   
   }
-
   .one-selected-textarea {
     height: 80%;
     margin-bottom: 1.5em;
@@ -377,7 +345,6 @@ textarea.ant-input.one-textarea {
     top: 1em;
   }
 }
-
 .one-selected-summary {
   display: flex;
   flex-direction: column;
@@ -409,7 +376,6 @@ textarea.ant-input.one-textarea {
   //   overflow-y: scroll;
   // }
 }
-
 //모달 테스트용
 .one-modal {
   background: rgba(0, 0, 0, 0.25);
@@ -421,7 +387,6 @@ textarea.ant-input.one-textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-
   .content {
     background: white;
     padding: 1rem;
@@ -429,11 +394,9 @@ textarea.ant-input.one-textarea {
     height: auto;
   }
 }
-
 .ant-layout-sider-children {
   border-right: 1px solid #e8e8e8;
 }
-
 i.anticon.anticon-right-circle {
   line-height: 0;
 }
@@ -442,7 +405,33 @@ i.anticon.anticon-right-circle {
   justify-content: center;
   align-items: center;
 }
-
+.ant-list-items {
+  overflow-y: scroll;
+  height: 70vh;
+}
+.ant-list-item-meta.list-item-wrap {
+  flex: none;
+  
+  .ant-list-item-meta-title {
+    margin-bottom: 0;
+  }
+  
+  & + div {
+    overflow: hidden;
+    margin-left: 4em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    @include for-mobile {
+      width: 100%;
+      margin-top: 0.4em;
+      margin-left: 0;
+    }
+  }
+}
+i.anticon.anticon-calendar {
+  margin-right: 0;
+}
 // mobile header
 .ant-layout-sider-zero-width-trigger {
   @include for-mobile {
