@@ -115,7 +115,7 @@ def register():
     cur = mysql.connection.cursor()
     user_email = request.get_json()['user_email']
     user_password = bcrypt.generate_password_hash(request.get_json()['user_password']).decode('utf-8')
-    user_confirm_password = bcrypt.generate_password_hash(request.get_json()['user_comfirm_password']).decode('utf-8')
+    user_confirm_password = bcrypt.generate_password_hash(request.get_json()['user_confirm_password']).decode('utf-8')
     check = request.get_json()['check']
     created_data_time = datetime.datetime.utcnow()
     if user_password == user_confirm_password and check == True:
