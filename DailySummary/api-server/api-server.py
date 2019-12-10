@@ -98,17 +98,21 @@ def login():
 def password_reset():
     cur = mysql.connection.cursor()
     user_email = get_jwt_identity()['user_email']
-    user_password = request.get_json()['user_password']
-    new_password = bcrypt.generate_password_hash(request.get_json()['new_password']).decode('utf-8')
-    created_data_time = datetime.datetime.utcnow()
-    cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
-    mysql.connection.commit()
-    result = jsonify({
-        'user_password' : user_password,
-        'new_password' : new_password,
-        'created_data_time' : created_data_time
-    })
-    return result
+    new_password = request.get_json()['new_password']
+    new_confirm_password = request.get_json()['new_confirm_password']
+    if new_password == new_confirm_password:
+        new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+        cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
+        mysql.connection.commit()
+        result = jsonify({
+            'new_password' : new_password
+        })
+        return result, 200
+    else:
+        result = jsonify({
+            'error' : 'error'
+        })
+        return result, 401
 
 
 @app.route('/api/register', methods=['POST'])
