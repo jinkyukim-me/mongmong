@@ -130,6 +130,22 @@ def register():
         return result, 401
 
 
+@app.route('/api/register_remove', methods=['GET'])
+@jwt_required
+def register_remove():
+    cur = mysql.connection.cursor()
+    user_email = get_jwt_identity()['user_email']
+
+    cur.execute("DELETE FROM user_info WHERE user_email = '" + str(user_email) + "'")
+    mysql.connection.commit()
+
+    result = jsonify({
+        'user_email': "remove"
+    })
+
+    return result
+
+
 @app.route('/api/post_input', methods=['POST'])
 @jwt_required
 def post_input():
