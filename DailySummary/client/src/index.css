@@ -73,6 +73,7 @@ code {
 
 /* 제목 글씨체 */
 @import url('https://fonts.googleapis.com/css?family=Single+Day&display=swap&subset=korean');
+@import url('https://cdn.jsdelivr.net/npm/typeface-nanum-barun-gothic@1.0.0/nanumbarungothic.min.css');
 
 /* import font face */
 @font-face {
@@ -87,7 +88,13 @@ code {
 .ant-calendar-month-panel-cell,
 .ant-calendar-month-panel-year-select-content,
 .ant-calendar-date-panel *,
-.one-header .one-logo a {
+.one-header .one-logo a span,
+.one-selected-review .one-selected-date-emo-wrapper .one-selected-date {
   font-family: 'maple-story', sans-serif;
-} 
+}
 
+textarea {
+	font-family:'Nanum Barun Gothic' !important;
+	line-height: 1.8;
+	resize: none !important;
+}

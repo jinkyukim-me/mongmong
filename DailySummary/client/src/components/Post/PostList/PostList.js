@@ -78,8 +78,8 @@ class PostsList extends Component {
     this.date = date.toLocaleString()    
     return (
       <List.Item key={item.post_id}>      
-        <List.Item.Meta title={<a href={"/post/"+item.post_id}>{this.date}</a>} className="list-item-wrap" />
-        <div>{item.paragraph}</div>
+        <List.Item.Meta title={this.date} className="list-item-wrap" />
+        <div>{<a href={"/post/"+item.post_id}>{item.paragraph}</a>}</div>
       </List.Item>
     );
   }
