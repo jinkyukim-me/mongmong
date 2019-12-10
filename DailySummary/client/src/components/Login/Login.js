@@ -9,7 +9,7 @@ const config = require('../../config');
 class NormalLoginForm extends Component {
 
   state = {    
-    isLogined: localStorage.getItem('token') ? true : false,
+    isLogined: localStorage.getItem('token'===!"undefined") ? true : false,
   }
   
 //   shouldComponentUpdate(nextProps, nextState){

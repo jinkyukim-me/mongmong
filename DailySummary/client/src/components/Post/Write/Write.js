@@ -27,47 +27,42 @@ class Write extends Component {
     });
   };
 
+
   handleOk = e => { 
     console.log(this.state)
-  //   componentWillMount() {
 
-  //     // Make a request for vehicle data
-   
-  //     axios.all([
-  //       axios.get('/api/seat/models'),
-  //       axios.get('/api/volkswagen/models')
-  //     ])
-  //     .then(axios.spread(function (seat, volkswagen) {
-  //       let vehicles = seat.data.concat(volkswagen.data);
-  //       this.setState({ vehicles: vehicles })
-  //     }))
-  //     //.then(response => this.setState({ vehicles: response.data }))
-  //     .catch(error => console.log(error));
-   
-  //  }
-    axios.all([
-      axios.post(config.serverUrl + "/api/post_input"),
-      axios.post(config.serverUrl + "/api/summary"),
-    ],
-    {
-      paragraph: this.state.paragraph,
-      strength_of_feeling: this.state.affectivity,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`,
-      },
-    })      
-     .then((response) => {       
-      console.log(this.state)  
-      // alert("당신의 소중한 하루가 저장되었습니다.")  
-      this.setState({
-        visible: false,
-        paragraph: "",
-        affectivity: "",     
+    axios.post(config.serverUrl + "/api/post_input", {
+        paragraph: this.state.paragraph,
+        strength_of_feeling: this.state.affectivity,
+    }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+    }})      
+    .then((response) => {       
+      axios.post(config.serverUrl + "/api/summary", {
+        paragraph: this.state.paragraph,
+        strength_of_feeling: Number(this.state.affectivity),
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      }})      
+      .then((response) => {       
+        alert("당신의 소중한 하루가 저장되었습니다.")  
+        this.setState({
+          visible: false,
+          paragraph: "",
+          affectivity: "",     
+        })
+        const year = '2019'
+        const month = '12'
+        this.props.history.push('/posts/' + year + '/' + month)       
       })
-      this.props.history.push('/posts/:year/:month')       
+      .catch((error) => {
+        console.error(error)
+        alert("에러 발생: " + error.message)
+      })
     })
     .catch((error) => {
       console.error(error)

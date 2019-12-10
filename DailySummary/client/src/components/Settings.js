@@ -14,7 +14,7 @@ class Settings extends Component {
   resetBtnClicked () {
     axios.post(config.serverUrl + '/api/password_reset', 
     {
-      params: {user_password: this.state.password},
+      user_password: this.state.password,
     },
     {
       headers: {token: localStorage.token},
@@ -105,7 +105,7 @@ class Settings extends Component {
             rules: [
               {
                 required: true,
-                message: 'Please input your password!',
+                message: '새로운 비밀번호를 입력해 주세요.',
               },
               {
                 validator: this.validateToNextPassword,
@@ -118,7 +118,7 @@ class Settings extends Component {
             rules: [
               {
                 required: true,
-                message: 'Please confirm your password!',
+                message: '다시 한 번 입력해 주세요.',
               },
               {
                 validator: this.compareToFirstPassword,
