@@ -150,7 +150,7 @@ class App extends Component {
                   title={
                     <span>
                       <Icon type="edit" />
-                      <span>그 날의 한 글</span>
+                      <span>그 날의 한 줄</span>
                     </span>
                   }
                 >

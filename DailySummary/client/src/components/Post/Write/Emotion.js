@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon } from 'antd'
+import { Button } from 'antd'
 import { faTired, faFrownOpen, faMeh, faSmile, faLaughSquint } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

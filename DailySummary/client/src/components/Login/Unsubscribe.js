@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Button } from 'antd';
 import axios from 'axios';
 
@@ -51,4 +51,4 @@ class Unsubscribe extends Component {
   }
 }
 
-export default Unsubscribe;
+export default withRouter(Unsubscribe);
