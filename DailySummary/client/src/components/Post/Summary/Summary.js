@@ -73,10 +73,13 @@ class Summary extends Component {
   };
   
   renderItem = (item) => {
+    let date = new Date(item.created_data_time)
+    this.date = date.toLocaleString()    
     return (
-      <List.Item key={item.post_id}>
-        <List.Item.Meta title={<a href={"/summary/"+item.post_id}>{item.created_data_time}</a>} className="list-item-wrap" />
-        <textarea className="ant-input one-textarea">{item.summary_text}</textarea>
+      <List.Item key={item.summary_id}>
+        {/* <List.Item.Meta title={<a href={"/summary/summary_id"}>{this.date}</a>} className="list-item-wrap" /> */}
+        <List.Item.Meta title={this.date} className="list-item-wrap" />
+        <div>{item.summary_text}</div>
       </List.Item>
     );
   }
