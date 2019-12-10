@@ -42,6 +42,7 @@ class Logout extends Component {
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
+          okText="예" cancelText="아니요"
         >
           로그아웃 하시겠습니까?
         </Modal>

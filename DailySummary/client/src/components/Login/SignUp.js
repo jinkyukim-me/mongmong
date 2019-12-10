@@ -96,7 +96,7 @@ class SignUpForm extends Component {
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit} className="one-signup flex flex-center">
-        <Form.Item label="E-mail">
+        <Form.Item label="이메일">
           {getFieldDecorator('email', {
             rules: [
               {
@@ -110,7 +110,7 @@ class SignUpForm extends Component {
             ],
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="Password" hasFeedback>
+        <Form.Item label="비밀번호" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
               {
@@ -123,7 +123,7 @@ class SignUpForm extends Component {
             ],
           })(<Input.Password />)}
         </Form.Item>
-        <Form.Item label="Confirm Password" hasFeedback>
+        <Form.Item label="비밀번호 확인" hasFeedback>
           {getFieldDecorator('confirm', {
             rules: [
               {
