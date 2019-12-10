@@ -17,12 +17,12 @@ class Review extends Component {
   showModal = () => {
     this.setState({
       visible: true,
-    });
+    });    
   };
 
   rmhandleOk = e => {
     let postId = this.props.match.params.view;
-    axios.delete(config.serverUrl +'/api/post_remove',
+    axios.post(config.serverUrl +'/api/post_remove',
       {
         post_id: postId,
         // post_id: this.props.match.params.view,
@@ -34,7 +34,7 @@ class Review extends Component {
       },
     })    
     .then((response) => {
-      alert("삭제되었습니다!")
+      // alert("삭제되었습니다!")
       this.setState({
         visible: false,
       });
@@ -45,12 +45,17 @@ class Review extends Component {
     })
   }
 
-  handleCancel = e => {
+  rmhandleCancel = e => {
     console.log(e);
     this.setState({
       visible: false,
     });
   };
+
+  btnToList = e => {
+    console.log(e)
+    this.props.history.goBack()
+  }
 
 
   componentDidMount = () => {
@@ -98,10 +103,10 @@ class Review extends Component {
       
         <div className="one-selected-btnContainer flex">
           <Button type="dashed" onClick={this.showModal} onChange={this.onChange} className="btn btn-delete">삭제</Button>
-            <Modal title="Basic Modal" visible={this.state.visible} okType= 'danger' onOk={this.rmhandleOk} onCancel={this.handleCancel} >
+            <Modal title="Basic Modal" visible={this.state.visible} okType= 'danger' onOk={this.rmhandleOk} onCancel={this.rmhandleCancel} >
               <p>정말 삭제하시겠습니까?</p>
             </Modal>
-          <Button type="primary" className="btn btn-submit" >
+          <Button type="primary" className="btn btn-submit" onClick={this.btnToList} >
             목록으로
           </Button>           
         </div>

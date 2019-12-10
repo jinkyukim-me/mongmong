@@ -49,7 +49,7 @@ class Write extends Component {
           'Authorization': `Bearer ${localStorage.token}`,
       }})      
       .then((response) => {       
-        alert("당신의 소중한 하루가 저장되었습니다.")  
+        // alert("당신의 소중한 하루가 저장되었습니다.")  
         this.setState({
           visible: false,
           paragraph: "",

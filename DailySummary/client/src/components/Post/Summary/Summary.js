@@ -77,7 +77,8 @@ class Summary extends Component {
     this.date = date.toLocaleString()    
     return (
       <List.Item key={item.summary_id}>
-        <List.Item.Meta title={<a href={"/summary/summary_id"}>{item.created_data_time}</a>} className="list-item-wrap" />
+        {/* <List.Item.Meta title={<a href={"/summary/summary_id"}>{this.date}</a>} className="list-item-wrap" /> */}
+        <List.Item.Meta title={this.date} className="list-item-wrap" />
         <div>{item.summary_text}</div>
       </List.Item>
     );
