@@ -298,6 +298,12 @@ textarea.ant-input.one-textarea {
     margin-right: 1em;
   }
   
+  .ant-list-item {
+    & > div:nth-child(2) a {
+      color: rgba(0, 0, 0, 0.65);
+    }
+  }
+  
   &.one-summary {
     .ant-list-item {
       div:nth-child(2) {
@@ -461,7 +467,7 @@ ul.ant-list-items {
 .ant-list-item-meta.list-item-wrap {
   flex: none;
   width: 180px;
-  cursor: pointer;
+  // cursor: pointer;
   
   .ant-list-item-meta-title {
     margin-bottom: 0;
