@@ -11,32 +11,32 @@ class Settings extends Component {
     autoCompleteResult: [],
   };
 
-  resetBtnClicked () {
-    axios.post(config.serverUrl + '/api/password_reset', 
-    {
-      user_password: this.state.password,
-    },
-    {
-      headers: {token: localStorage.token},
-    }).then(res => {      
-      console.log(res.result)
-      this.props.history.push("/posts");
-    }).catch((error) => {
-      if (error.response) {
-        alert(error.response.status + ": " + 
-              error.response.data.message);
-      } else {
-        alert(error);
-      }
-    })
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
+      axios.post(config.serverUrl + '/api/password_reset', 
+      {
+        new_password: values.password,
+        new_confirm_password: values.confirm,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
+      }}).then(res => {      
+        console.log(res.result)
+        this.props.history.push("/");
+      }).catch((error) => {
+        if (error.response) {
+          alert(error.response.status + ": " + 
+                error.response.data.message);
+        } else {
+          alert(error);
+        }
+      })
     });
   };
 
@@ -127,7 +127,7 @@ class Settings extends Component {
           })(<Input.Password onBlur={this.handleConfirmBlur} />)}
         </Form.Item>
         <Form.Item {...tailFormItemLayout} className="btn-wrap flex">
-          <Button type="primary" htmlType="submit" className="btn btn-submit" onClick="this.resetBtnClicked">
+          <Button type="primary" htmlType="submit" className="btn btn-submit" onClick="this.handleSubmit">
             변경
           </Button>
           <Button className="btn btn-unsubscribe">

@@ -140,7 +140,11 @@ def register_remove():
     cur = mysql.connection.cursor()
     user_email = get_jwt_identity()['user_email']
 
-    cur.execute("DELETE FROM user_info WHERE user_email = '" + str(user_email) + "'")
+    cur.execute("DELETE FROM user_summary where user_email = '" + str(user_email) + "'")
+    mysql.connection.commit()
+    cur.execute("DELETE FROM user_post where user_email = '" + str(user_email) + "'")
+    mysql.connection.commit()
+    cur.execute("DELETE FROM user_info where user_email = '" + str(user_email) + "'")
     mysql.connection.commit()
 
     result = jsonify({
@@ -347,4 +351,4 @@ def summary_list():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0",port="5000")

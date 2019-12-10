@@ -49,7 +49,6 @@ class Write extends Component {
           'Authorization': `Bearer ${localStorage.token}`,
       }})      
       .then((response) => {       
-        // alert("당신의 소중한 하루가 저장되었습니다.")  
         this.setState({
           visible: false,
           paragraph: "",
@@ -90,14 +89,19 @@ class Write extends Component {
   }
 
   render() {
-
+    const randomTxt = () => {
+      const texts = ['기분이 어떠세요?', '오늘은 어땠나요?', '하고 싶은 이야기를 들려주세요.', '오늘은 무슨 일이 있었나요?', '당신의 이야기가 궁금해요.', '마음 속에 어떤 이야기가 있나요?', '소중한 글 잘 보관해 드릴께요.'];
+      const num = Math.floor(Math.random() * 7);
+      
+      return texts[num];
+    }
     return (
       <div className="one-post-write">
         <div className="one-liveClock-container">
           <LiveClock />
         </div> 
         <TextArea className="one-textarea" 
-          placeholder="마음 가는대로~"
+          placeholder={randomTxt()}
           value={this.state.paragraph}
           onChange={this.paragraphChanged}  />
         <div className="one-post-btn-container flex">
