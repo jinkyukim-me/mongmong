@@ -34,13 +34,13 @@ jwt = JWTManager(app)
 
 CORS(app, resources=r'/api/*')
 
-json_file = open("model_2.json", "r")
+json_file = open("model_1.json", "r")
 loaded_model_json = json_file.read()
 json_file.close()
 
 global model
 model = model_from_json(loaded_model_json)
-model.load_weights("model_2.h5")
+model.load_weights("model_1.h5")
 print("Loaded model from disk")
 global graph
 graph = tf.get_default_graph()
