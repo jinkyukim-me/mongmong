@@ -25,7 +25,7 @@
     "reqwest": "^2.0.5"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "set port=80 && react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
