@@ -24,7 +24,8 @@ class Unsubscribe extends Component {
       this.setState({
         isLogined: false
       })
-      this.props.history.push('/')
+      // this.props.history.push('/')
+      window.location.assign('/');
     })
     .catch((error) => {
       alert("잠시만요!" + error.message)
