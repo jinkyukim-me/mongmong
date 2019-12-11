@@ -163,22 +163,27 @@ def post_input():
     strength_of_feeling = request.get_json()['strength_of_feeling']
     created_data_time = datetime.datetime.utcnow()
 
-    cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
+    if strength_of_feeling < 5:
+        cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
                 str(user_email) + "', '" +
                 str(paragraph) + "', '" +
                 str(strength_of_feeling) + "', '" +
                 str(created_data_time) + "')")
 
-    mysql.connection.commit()
+        mysql.connection.commit()
 
-    result = {
-        'user_email': user_email,
-        'paragraph': paragraph,
-        'strength_of_feeling': strength_of_feeling,
-        'created_data_time': created_data_time
-    }
-
-    return jsonify({'result': result})
+        result = {
+            'user_email': user_email,
+            'paragraph': paragraph,
+            'strength_of_feeling': strength_of_feeling,
+            'created_data_time': created_data_time
+        }
+        return jsonify({'result': result})
+    else:
+        result = jsonify({
+            '감정': "감정을 입력해 주세요."
+        })
+        return result
 
 
 @app.route('/api/post_remove', methods=['POST'])
