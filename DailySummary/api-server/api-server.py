@@ -163,7 +163,7 @@ def post_input():
     strength_of_feeling = request.get_json()['strength_of_feeling']
     created_data_time = datetime.datetime.utcnow()
 
-    if strength_of_feeling < 5:
+    if int(strength_of_feeling) < 5:
         cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
                 str(user_email) + "', '" +
                 str(paragraph) + "', '" +
