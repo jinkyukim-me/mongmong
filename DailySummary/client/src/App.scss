@@ -205,9 +205,12 @@ textarea.ant-input.one-textarea {
 }
 .one-settings {
   flex-direction: column;
+  // width: 50%;
   height: calc(100vh - 69px);
   
   @include for-mobile {
+    // width: 50%;
+    width: 80%;
     height: calc(100vh - 133px);
   }
   
@@ -218,6 +221,13 @@ textarea.ant-input.one-textarea {
     @include for-mobile {
       width: 80%;
       transform: none;
+      
+      @media screen and (min-width: 421px) {
+        &:last-child {
+          align-self: flex-end;
+          width: 63%;
+        }
+      }
     }
   }
   
