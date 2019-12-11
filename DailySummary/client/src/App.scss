@@ -98,13 +98,21 @@ textarea.ant-input.one-textarea {
 .one-welcome {
   overflow: hidden;
   position: relative;
-  height: 100%;
+  height: calc(100vh - 69px);
+  
+  @include for-mobile {
+    height: calc(100vh - 133px);
+  }
   
   .txt {
     position: relative;
     z-index: 10;
     font-weight: lighter;
     font-size: 2.4rem;
+    
+    @include for-mobile {
+      font-size: 1.6rem;
+    }
   }
   
   .img {
@@ -130,8 +138,12 @@ textarea.ant-input.one-textarea {
   }
 }
 .one-login {
-  height: 100%;
   background-color: #fff;
+  height: calc(100vh - 69px);
+  
+  @include for-mobile {
+    height: calc(100vh - 133px);
+  }
   
   .shortcut {
     justify-content: space-evenly;
@@ -158,9 +170,12 @@ textarea.ant-input.one-textarea {
   }
 }
 .one-post-write {
-  height: 100%;
   padding: 9% 7%;
-  clear: both;
+  clear: both;height: calc(100vh - 69px);
+  
+  @include for-mobile {
+    height: calc(100vh - 133px);
+  }
   
   .one-liveClock-container {
     padding: 0.5em ;
@@ -190,7 +205,11 @@ textarea.ant-input.one-textarea {
 }
 .one-settings {
   flex-direction: column;
-  height: 100%;
+  height: calc(100vh - 69px);
+  
+  @include for-mobile {
+    height: calc(100vh - 133px);
+  }
   
   .ant-form-item {
     width: 450px;
@@ -276,14 +295,26 @@ textarea.ant-input.one-textarea {
     margin-right: 0.8em;
   }
 }
+
+.one-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .one-list {
   position: relative;
-  top: 50%;
-  margin: 0 5%;
-  transform: translateY(-50%);
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  width: 80%;
+  // margin: 0 5%;
+  // transform: translate(-50%, -50%);
+  // transform: translateY(-50%);
   
   @include for-mobile {
-    margin: 0 8%;
+    // margin: 0 8%;
+    // margin: 0;
   }
   
   .ant-list-item-meta-content {
@@ -320,6 +351,7 @@ textarea.ant-input.one-textarea {
 }
 .one-selected-review , .one-selected-summary{
   position: relative;
+  width: 100%;
   height: 46vh;
   margin: 9% 7%;
   border: 3px solid #555;
@@ -328,6 +360,7 @@ textarea.ant-input.one-textarea {
   
   @include for-mobile {
     height: 60vh;
+    margin-top: 0;
   }
   
   .one-selected-date-emo-wrapper {
@@ -374,7 +407,7 @@ textarea.ant-input.one-textarea {
     font-size: 1.1rem;
     
     @include for-mobile {
-      height: 84%;
+      height: 81%;
     }
   }
   
@@ -506,6 +539,11 @@ i.anticon.anticon-calendar {
   .icon {
     font-size: 1.3em;
   }
+}
+
+.ant-menu-inline .ant-menu-item,
+.ant-menu-inline .ant-menu-submenu-title {
+  width: 100%;
 }
 
 // mobile header
