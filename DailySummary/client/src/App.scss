@@ -180,6 +180,7 @@ textarea.ant-input.one-textarea {
   }
   
   .one-liveClock-container {
+    width: 100%;
     padding: 0.5em ;
     float: left;
     font-family: 'Song Myung', serif;
@@ -571,6 +572,7 @@ i.anticon.anticon-calendar {
     
     & > span {
       display: flex;
+      align-items: center;
     }
   }
   

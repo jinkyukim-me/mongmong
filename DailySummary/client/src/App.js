@@ -120,7 +120,7 @@ class App extends Component {
                   title={
                     <span>
                       <Icon type="read" />
-                      <span>일기 보러가기</span>
+                      <span>일기 다시보기</span>
                     </span>
                   }
                 >
