@@ -3,20 +3,15 @@ import axios from 'axios';
 import { Layout, Form, Icon, Input, Button } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import { LoginContext } from '../../contexts/login';
-
 const config = require('../../config');
-
 class NormalLoginForm extends Component {
-
   state = {    
-    isLogined: localStorage.getItem('token'===!"undefined") ? true : false,
+    isLogined: localStorage.getItem('token') ? true : false,
   }
-  
 //   shouldComponentUpdate(nextProps, nextState){
 //     console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
 //     return true;
 // }
-
   login = (email, password) => {
     axios.post(config.serverUrl + '/api/login', {
       user_email: email,
@@ -39,7 +34,6 @@ class NormalLoginForm extends Component {
       }
     })
   }
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -50,9 +44,6 @@ class NormalLoginForm extends Component {
       }   
     });
   };
-
-  
-
   render() {
   const { getFieldDecorator } = this.props.form
     return (
@@ -87,9 +78,7 @@ class NormalLoginForm extends Component {
     )
   }
 }
-
 const WrappedNormalLoginForm = withRouter(Form.create({ name: 'normal_login' })(NormalLoginForm));
-
 const LoginContainer = () => (
     <LoginContext.Consumer>
     {
@@ -98,5 +87,4 @@ const LoginContainer = () => (
     }
     </LoginContext.Consumer>
 );
-
 export default withRouter(LoginContainer);

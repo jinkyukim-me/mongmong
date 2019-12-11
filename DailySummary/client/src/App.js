@@ -14,13 +14,10 @@ import Unsubscribe from './components/Login/Unsubscribe'
 import Review from './components/Post/Write/Review'
 import Summary from './components/Post/Summary/Summary'
 import { LoginContext } from './contexts/login'
-
 const { Sider, Content, Footer } = Layout
 const { SubMenu } = Menu
 const { MonthPicker } = DatePicker;
-
 class App extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -33,16 +30,13 @@ class App extends Component {
     //this.handleOk = this.handleOk.bind(this)
     //this.handleCancel = this.handleCancel.bind(this)
   }
-
   setIsLogined = (isLogined) => {
     this.setState({ isLogined })
   }
-
   onCollapse = (collapsed) => {
     console.log(collapsed)
     this.setState({ collapsed })
   }
-
   pickedMonth = (date, dateString) => {
     const dateStr = dateString.replace(/-/g, '');
     const url = '/posts/' + dateStr.substring( 0, 4 ) + 
@@ -50,7 +44,6 @@ class App extends Component {
     console.log(url);
     this.props.history.push(url);
   }
-
   pickedDate = (date, dateString) => {
     const dateStr = dateString.replace(/-/g, '');
     const url = '/summary/' + dateStr.substring( 0, 4 ) + 
@@ -59,14 +52,12 @@ class App extends Component {
     console.log(url);
     this.props.history.push(url);
   }
-
   showModal = () => {
     console.log("showModal");
     this.setState({
       visible: true,
     });     
   };
-
   handleLogout = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -78,7 +69,6 @@ class App extends Component {
     });
     this.props.history.push('/')
   };
-  
   handleCancel = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -88,7 +78,6 @@ class App extends Component {
       visible: false,
     });
   };
-
   // writeBtnClicked = e => {
   //   console.log(e)
   //   if(this.state.isLogined) {
@@ -97,7 +86,6 @@ class App extends Component {
   //     this.props.history.push('/login')
   //   }
   // }
-
   render () {
     return (
       <LoginContext.Provider value={{
@@ -110,10 +98,8 @@ class App extends Component {
               breakpoint="lg"
               collapsedWidth="0"
               onBreakpoint={broken => {
-                
               }}
               onCollapse={(collapsed, type) => {
-                
               }}
               className="one-sidebar"
             >
@@ -168,37 +154,33 @@ class App extends Component {
                     <span className="nav-text">설정</span>
                   </Link>
                 </Menu.Item>
-                {
-                  this.state.isLogined ? ( 
-                <Menu.Item key="5"
-                  className="one-logout"
-                  onClick={this.showModal}
-                  >
-                    <Icon type="logout" />
-                    <span className="nav-text">
-                      로그아웃
-                    </span>
-                    <Modal                      
-                      title=""
-                      visible={this.state.visible}
-                      onOk={this.handleLogout}
-                      onCancel={this.handleCancel}
-                      okText="예" cancelText="아니요"
+                { this.state.isLogined ? ( 
+                  <Menu.Item key="5"
+                    className="one-logout"
+                    onClick={this.showModal}
                     >
-                      로그아웃 하시겠습니까?
-                    </Modal>   {/* 로그아웃 클릭시 로그인 버튼으로 전환 및 연동 부분 추가 */}
-                </Menu.Item>
-                  ) : (
-                    <Menu.Item key="5"
-                    className="one-login"
-                    >
-                  <Link to="/login">
-                    <Icon type="login" />
-                    <span className="nav-text">로그인</span>
-                  </Link>
+                      <Icon type="logout" />
+                      <span className="nav-text">
+                        로그아웃
+                      </span>
+                      <Modal                      
+                        title=""
+                        visible={this.state.visible}
+                        onOk={this.handleLogout}
+                        onCancel={this.handleCancel}
+                        okText="예" cancelText="아니요"
+                      >
+                        로그아웃 하시겠습니까?
+                      </Modal>   {/* 로그아웃 클릭시 로그인 버튼으로 전환 및 연동 부분 추가 */}
                   </Menu.Item>
-                    )
-                }
+                ) : ( 
+                  <Menu.Item key="5" className="one-login" >  
+                    <Link to="/login">                
+                      <Icon type="login" />
+                      <span className="nav-text">로그인</span>
+                    </Link>              
+                  </Menu.Item>                  
+                )}
               </Menu>
             </Sider>
             <Layout className="one-main">

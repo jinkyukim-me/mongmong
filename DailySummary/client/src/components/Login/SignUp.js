@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { Form, Input, Checkbox, Button, } from 'antd';
 import axios from 'axios';
-
 const config = require('../../config');
-
 class SignUpForm extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
   };
-
   handleSubmit = e => {
     console.log(e.target);
     e.preventDefault();
@@ -18,7 +15,6 @@ class SignUpForm extends Component {
       if (!err) {
         console.log('Received values of form: ', values);
       }
-      
       axios.post(config.serverUrl + '/api/register', {
         user_email: values.email,
         user_password: values.password,
@@ -26,7 +22,7 @@ class SignUpForm extends Component {
         check: values.agreement,
       })
       .then((response) => {
-        alert(`${response.user_email} 님의 회원가입이 완료되었습니다.`);
+        alert(`${values.email} 님의 회원가입이 완료되었습니다.`);
         this.props.history.push('/login');
       })
       .catch((error) => {
@@ -35,21 +31,18 @@ class SignUpForm extends Component {
       });        
     });
   };
-
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
-
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
-      callback('두 비밀번호가 일치하지 않습니다.');
+      callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
     }
   };
-
   validateToNextPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && this.state.confirmDirty) {
@@ -57,7 +50,6 @@ class SignUpForm extends Component {
     }
     callback();
   };
-
   // handleWebsiteChange = value => {
   //   let autoCompleteResult;
   //   if (!value) {
@@ -67,10 +59,8 @@ class SignUpForm extends Component {
   //   }
   //   this.setState({ autoCompleteResult });
   // };
-
   render() {
     const { getFieldDecorator } = this.props.form;
-
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -93,7 +83,6 @@ class SignUpForm extends Component {
         },
       },
     };
-
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit} className="one-signup flex flex-center">
         <Form.Item label="이메일">
@@ -166,7 +155,5 @@ class SignUpForm extends Component {
     );
   }
 }
-
 const WrappedSignUpForm = Form.create({ name: 'register' })(SignUpForm);
-
 export default withRouter(WrappedSignUpForm);

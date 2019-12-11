@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input,  Button  } from 'antd';
 import axios from 'axios';
-
 const config = require('../config');
-
 class Settings extends Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
   };
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -39,12 +36,10 @@ class Settings extends Component {
       })
     });
   };
-
   handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
-
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
@@ -53,7 +48,6 @@ class Settings extends Component {
       callback();
     }
   };
-
   validateToNextPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && this.state.confirmDirty) {
@@ -61,7 +55,6 @@ class Settings extends Component {
     }
     callback();
   };
-
   handleWebsiteChange = value => {
     let autoCompleteResult;
     if (!value) {
@@ -71,10 +64,8 @@ class Settings extends Component {
     }
     this.setState({ autoCompleteResult });
   };
-
   render() {
     const { getFieldDecorator } = this.props.form;
-
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -97,10 +88,9 @@ class Settings extends Component {
         },
       },
     };
-
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit} className="one-settings flex flex-center">
-        <Form.Item label="비밀번호" className="one-input-pw" hasFeedback>
+        <Form.Item label="새 비밀번호" className="one-input-pw" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
               {
@@ -113,7 +103,7 @@ class Settings extends Component {
             ],
           })(<Input.Password />)}
         </Form.Item>
-        <Form.Item label="비밀번호 변경" className="one-input-confirm-pw" hasFeedback>
+        <Form.Item label="비밀번호 확인" className="one-input-confirm-pw" hasFeedback>
           {getFieldDecorator('confirm', {
             rules: [
               {
@@ -140,7 +130,5 @@ class Settings extends Component {
     );
   }
 }
-
 const WrappedSettingsForm = Form.create({ name: 'register' })(Settings);
-
 export default WrappedSettingsForm;
