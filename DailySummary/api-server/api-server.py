@@ -269,7 +269,7 @@ def summary():
         for j in range(x):
             data_list1.remove('')
     texts = data_list1
-    penalty = lambda x: 0 if (20 <= len(x) <= 120) else 1
+    penalty = lambda x: 0 if (10 <= len(x) <= 120) else 1
     stopwords = {'오늘', '오늘은'}
     keywords, sents = summarize_with_sentences(
         texts,
