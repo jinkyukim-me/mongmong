@@ -320,8 +320,17 @@ textarea.ant-input.one-textarea {
     right: 1em;
   }
   
+  // .ant-btn {
+  //   z-index: 10;
+  // }
+  
   .icon {
     font-size: 2.6rem;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // z-index: -1;
   }
 }
 
@@ -419,7 +428,7 @@ textarea.ant-input.one-textarea {
   .one-selected-textarea {
     width: 100%;
     border: 0;
-    height: 67%;
+    height: 60%;
     // height: 80%;
     margin-bottom: 1.5em;
     padding: 1rem;
@@ -430,7 +439,7 @@ textarea.ant-input.one-textarea {
     font-size: 1.1rem;
     
     @include for-mobile {
-      height: 81%;
+      height: 73%;
     }
   }
   
