@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95005829-fb1e-48fa-98d1-0484697f01a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/DailySummary/api-server/api-server.py" beforeDir="false" afterPath="$PROJECT_DIR$/DailySummary/api-server/api-server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
