@@ -311,6 +311,10 @@ textarea.ant-input.one-textarea {
   justify-content: center;
   align-items: center;
   
+  .ant-list-items {
+    height: 60vh;
+  }
+  
   .one-selected-emotion {
     position: absolute;
     right: 1em;
