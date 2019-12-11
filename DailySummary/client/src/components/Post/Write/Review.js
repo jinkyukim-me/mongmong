@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'antd';
 import axios from 'axios';
 import Emotion from './Emotion';
+import { faTired, faFrownOpen, faMeh, faSmile, faLaughSquint } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const config = require('../../../config');
 
@@ -11,6 +13,7 @@ class Review extends Component {
     this.state = {
       data: '',
       visible: false,
+      emotions: [faTired, faFrownOpen, faMeh, faSmile, faLaughSquint],
     };
   }
   
@@ -84,6 +87,8 @@ class Review extends Component {
   render() { 
     let date = new Date()
     this.date = date.toLocaleString()
+    console.log(typeof this.state.emotions[this.state.data.strength_of_feeling]);
+    
     
     return (
       <div className="one-selected-review">
@@ -94,7 +99,7 @@ class Review extends Component {
           {this.date}
           </p>
           <div className="one-selected-emotion flex" type="input">
-            {this.state.data.strength_of_feeling}
+            <FontAwesomeIcon icon={this.state.emotions[this.state.data.strength_of_feeling]} className="icon" />
           </div>
         </div>
         <textarea className="one-selected-textarea" value={this.state.data.paragraph} readOnly>
