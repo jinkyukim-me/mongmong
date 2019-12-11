@@ -162,7 +162,7 @@ def post_input():
     paragraph = request.get_json()['paragraph']
     strength_of_feeling = request.get_json()['strength_of_feeling']
     created_data_time = datetime.datetime.utcnow()
-
+    
     cur.execute("INSERT INTO user_post (user_email, paragraph, strength_of_feeling, created_data_time) VALUES ('" +
                 str(user_email) + "', '" +
                 str(paragraph) + "', '" +
@@ -177,7 +177,6 @@ def post_input():
         'strength_of_feeling': strength_of_feeling,
         'created_data_time': created_data_time
     }
-
     return jsonify({'result': result})
 
 
