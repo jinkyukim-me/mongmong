@@ -18,7 +18,7 @@ from konlpy.tag import Okt
 okt = Okt()
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = '1sentence.ml'
+app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = '1sentence'
 app.config['MYSQL_PASSWORD'] = '1sen'
 app.config['MYSQL_DB'] = 'diarydb'
@@ -81,15 +81,14 @@ def login():
     user_email = request.get_json()['user_email']
     user_password = request.get_json()['user_password']
     result = ""
-    cur.execute("SELECT * FROM user_info where user_email = '" + str(user_email) + "'")
+    cur.execute("SELECT user_password FROM user_info where user_email = '" + str(user_email) + "'")
     rv = cur.fetchone()
-    if bcrypt.check_password_hash(rv['user_password'], user_password):
-        access_token = create_access_token(identity = {'user_email': rv['user_email']})
+    if rv is not None and bcrypt.check_password_hash(rv['user_password'], user_password):
+        access_token = create_access_token(identity = {'user_email': user_email})
         result = jsonify({"token":access_token})
         return result, 200
     else:
-
-        result = jsonify({"error":"Invalid username and password"})
+        result = jsonify({"error":"Invalid username or password"})
         return result, 401
 
 
@@ -102,7 +101,9 @@ def password_reset():
     new_confirm_password = request.get_json()['new_confirm_password']
     if new_password == new_confirm_password:
         new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
-        cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "' WHERE user_email = '" + str(user_email) + "'")
+        cur.execute("UPDATE user_info SET user_password = '" + str(new_password) + "'" +
+                    ", modified_data_time = now() " +
+                    "WHERE user_email = '" + str(user_email) + "'")
         mysql.connection.commit()
         result = jsonify({
             "new_password": new_password
@@ -121,13 +122,13 @@ def register():
     user_email = request.get_json()['user_email']
     user_password = request.get_json()['user_password']
     user_confirm_password = request.get_json()['user_confirm_password']
-    check = request.get_json()['check']
-    created_data_time = datetime.datetime.utcnow()
-    if len(user_email) > 5 and user_password == user_confirm_password and check == True:
+    agree = request.get_json()['check']
+    if agree and len(user_email) > 5 and user_password == user_confirm_password:
         user_password = bcrypt.generate_password_hash(user_password).decode('utf-8')
-        cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time) VALUES ('" + str(user_email) + "', '" + str(user_password) + "', '" + str(created_data_time) + "')")
+        cur.execute("INSERT INTO user_info (user_email, user_password, created_data_time, agree_yn) " +
+                    "VALUES ('" + str(user_email) + "', '" + str(user_password) + "', now(), 'Y')")
         mysql.connection.commit()
-        result = jsonify({"user_email" : user_email, "user_password" : user_password, "created_data_time" : created_data_time})
+        result = jsonify({"user_email" : user_email})
         return result, 200
     else:
         result = jsonify({"error": "error"})
